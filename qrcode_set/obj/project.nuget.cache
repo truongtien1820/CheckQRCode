@@ -1,0 +1,36 @@
+{
+  "version": 2,
+  "dgSpecHash": "JE1BmsiSWoQo8UL4LjPD8LMsrKsd1AVnxadoBUxcRGOk3TSX50hNYbIor97rHo4+lil7lf/FNKuTelVRfA8YKQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\it_09\\Desktop\\Tien\\2024\\QR014\\qrcode_set\\QR014_CODECHECKING.vbproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\it_09\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
+    "C:\\Users\\it_09\\.nuget\\packages\\oracle.manageddataaccess\\19.18.0\\oracle.manageddataaccess.19.18.0.nupkg.sha512",
+    "C:\\Users\\it_09\\.nuget\\packages\\qrcoder\\1.4.2\\qrcoder.1.4.2.nupkg.sha512",
+    "C:\\Users\\it_09\\.nuget\\packages\\sqlite\\3.13.0\\sqlite.3.13.0.nupkg.sha512",
+    "C:\\Users\\it_09\\.nuget\\packages\\sqlite.interop.dll\\1.0.103\\sqlite.interop.dll.1.0.103.nupkg.sha512",
+    "C:\\Users\\it_09\\.nuget\\packages\\stub.system.data.sqlite.core.netframework\\1.0.118\\stub.system.data.sqlite.core.netframework.1.0.118.nupkg.sha512",
+    "C:\\Users\\it_09\\.nuget\\packages\\system.data.sqlite\\1.0.117\\system.data.sqlite.1.0.117.nupkg.sha512",
+    "C:\\Users\\it_09\\.nuget\\packages\\system.data.sqlite.core\\1.0.118\\system.data.sqlite.core.1.0.118.nupkg.sha512",
+    "C:\\Users\\it_09\\.nuget\\packages\\system.data.sqlite.ef6\\1.0.117\\system.data.sqlite.ef6.1.0.117.nupkg.sha512",
+    "C:\\Users\\it_09\\.nuget\\packages\\system.data.sqlite.linq\\1.0.117\\system.data.sqlite.linq.1.0.117.nupkg.sha512",
+    "C:\\Users\\it_09\\.nuget\\packages\\system.net.primitives\\4.3.1\\system.net.primitives.4.3.1.nupkg.sha512",
+    "C:\\Users\\it_09\\.nuget\\packages\\zxing.net\\0.16.0\\zxing.net.0.16.0.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1608",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Detected package version outside of dependency constraint: System.Data.SQLite 1.0.117 requires System.Data.SQLite.Core (= 1.0.117) but version System.Data.SQLite.Core 1.0.118 was resolved.",
+      "libraryId": "System.Data.SQLite.Core",
+      "targetGraphs": [
+        ".NETFramework,Version=v4.5.2",
+        ".NETFramework,Version=v4.5.2/win",
+        ".NETFramework,Version=v4.5.2/win-arm64",
+        ".NETFramework,Version=v4.5.2/win-x64",
+        ".NETFramework,Version=v4.5.2/win-x86"
+      ]
+    }
+  ]
+}

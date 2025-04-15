@@ -1,0 +1,60 @@
+C:\Users\vanhai\Desktop\qrcode_set\qrcode_set\bin\Debug\QRCoder.dll
+C:\Users\vanhai\Desktop\qrcode_set\qrcode_set\obj\Debug\qrcode_set.qrcode_manage.resources
+C:\Users\vanhai\Desktop\qrcode_set\qrcode_set\obj\Debug\qrcode_set.qrcode_set.resources
+C:\Users\vanhai\Desktop\qrcode_set\qrcode_set\obj\Debug\qrcode_set.Resources.resources
+C:\Users\vanhai\Desktop\qrcode_set\qrcode_set\obj\Debug\qrcode_set.vbproj.GenerateResource.cache
+C:\Users\vanhai\Desktop\qrcode_set\qrcode_set\obj\Debug\qrcode_set.vbproj.CoreCompileInputs.cache
+C:\Users\vanhai\Desktop\qrcode_set\qrcode_set\obj\Debug\qrcode_set.vbproj.CopyComplete
+C:\Users\vanhai\Desktop\qrcode_set\qrcode_set\bin\Debug\QRCODE_SET.exe.config
+C:\Users\vanhai\Desktop\qrcode_set\qrcode_set\bin\Debug\QRCODE_SET.exe
+C:\Users\vanhai\Desktop\qrcode_set\qrcode_set\bin\Debug\QRCODE_SET.pdb
+C:\Users\vanhai\Desktop\qrcode_set\qrcode_set\bin\Debug\QRCODE_SET.xml
+C:\Users\vanhai\Desktop\qrcode_set\qrcode_set\obj\Debug\QRCODE_SET.exe
+C:\Users\vanhai\Desktop\qrcode_set\qrcode_set\obj\Debug\QRCODE_SET.xml
+C:\Users\vanhai\Desktop\qrcode_set\qrcode_set\obj\Debug\QRCODE_SET.pdb
+C:\Users\vanhai\Desktop\qrcode_set\qrcode_set\obj\Debug\qrcode_set.vbproj.AssemblyReference.cache
+C:\Users\vanhai\Desktop\qrcode_set\qrcode_set\bin\Debug\zxing.dll
+C:\Users\vanhai\Desktop\qrcode_set\qrcode_set\bin\Debug\zxing.presentation.dll
+D:\qrcode_set\qrcode_set\bin\Debug\qrcode_set.exe.config
+D:\qrcode_set\qrcode_set\bin\Debug\qrcode_set.exe
+D:\qrcode_set\qrcode_set\bin\Debug\qrcode_set.pdb
+D:\qrcode_set\qrcode_set\bin\Debug\qrcode_set.xml
+D:\qrcode_set\qrcode_set\bin\Debug\QRCoder.dll
+D:\qrcode_set\qrcode_set\bin\Debug\zxing.dll
+D:\qrcode_set\qrcode_set\bin\Debug\zxing.presentation.dll
+D:\qrcode_set\qrcode_set\obj\Debug\qrcode_set.vbproj.AssemblyReference.cache
+D:\qrcode_set\qrcode_set\obj\Debug\qrcode_set.vbproj.SuggestedBindingRedirects.cache
+D:\qrcode_set\qrcode_set\obj\Debug\qrcode_set.qrcode_manage.resources
+D:\qrcode_set\qrcode_set\obj\Debug\qrcode_set.qrcode_set.resources
+D:\qrcode_set\qrcode_set\obj\Debug\qrcode_set.Resources.resources
+D:\qrcode_set\qrcode_set\obj\Debug\qrcode_set.vbproj.GenerateResource.cache
+D:\qrcode_set\qrcode_set\obj\Debug\qrcode_set.vbproj.CoreCompileInputs.cache
+D:\qrcode_set\qrcode_set\obj\Debug\qrcode_set.vbproj.CopyComplete
+D:\qrcode_set\qrcode_set\obj\Debug\qrcode_set.exe
+D:\qrcode_set\qrcode_set\obj\Debug\qrcode_set.xml
+D:\qrcode_set\qrcode_set\obj\Debug\qrcode_set.pdb
+D:\qrcode_set\qrcode_set\obj\Debug\qrcode_set.qrcode_setting.resources
+D:\Ứng dụng Visual Studio\qrcode_set\qrcode_set\obj\Debug\qrcode_set.vbproj.AssemblyReference.cache
+D:\Ứng dụng Visual Studio\qrcode_set\qrcode_set\obj\Debug\qrcode_set.vbproj.ResolveComReference.cache
+D:\Ứng dụng Visual Studio\qrcode_set\qrcode_set\obj\Debug\QR014_CODECHECKING.qrcode_manage.resources
+D:\Ứng dụng Visual Studio\qrcode_set\qrcode_set\obj\Debug\QR014_CODECHECKING.qrcode_set.resources
+D:\Ứng dụng Visual Studio\qrcode_set\qrcode_set\obj\Debug\QR014_CODECHECKING.Resources.resources
+D:\Ứng dụng Visual Studio\qrcode_set\qrcode_set\obj\Debug\QR014_CODECHECKING.qrcode_setting.resources
+D:\Ứng dụng Visual Studio\qrcode_set\qrcode_set\obj\Debug\qrcode_set.vbproj.GenerateResource.cache
+D:\Ứng dụng Visual Studio\qrcode_set\qrcode_set\obj\Debug\qrcode_set.vbproj.CoreCompileInputs.cache
+D:\Ứng dụng Visual Studio\qrcode_set\qrcode_set\bin\Debug\QR014_CODECHECKING.exe.config
+D:\Ứng dụng Visual Studio\qrcode_set\qrcode_set\bin\Debug\QR014_CODECHECKING.exe
+D:\Ứng dụng Visual Studio\qrcode_set\qrcode_set\bin\Debug\QR014_CODECHECKING.pdb
+D:\Ứng dụng Visual Studio\qrcode_set\qrcode_set\bin\Debug\QR014_CODECHECKING.xml
+D:\Ứng dụng Visual Studio\qrcode_set\qrcode_set\bin\Debug\EntityFramework.SqlServer.dll
+D:\Ứng dụng Visual Studio\qrcode_set\qrcode_set\bin\Debug\EntityFramework.dll
+D:\Ứng dụng Visual Studio\qrcode_set\qrcode_set\bin\Debug\QRCoder.dll
+D:\Ứng dụng Visual Studio\qrcode_set\qrcode_set\bin\Debug\System.Data.SQLite.dll
+D:\Ứng dụng Visual Studio\qrcode_set\qrcode_set\bin\Debug\System.Data.SQLite.EF6.dll
+D:\Ứng dụng Visual Studio\qrcode_set\qrcode_set\bin\Debug\System.Data.SQLite.Linq.dll
+D:\Ứng dụng Visual Studio\qrcode_set\qrcode_set\bin\Debug\zxing.dll
+D:\Ứng dụng Visual Studio\qrcode_set\qrcode_set\bin\Debug\zxing.presentation.dll
+D:\Ứng dụng Visual Studio\qrcode_set\qrcode_set\obj\Debug\qrcode_set.vbproj.CopyComplete
+D:\Ứng dụng Visual Studio\qrcode_set\qrcode_set\obj\Debug\QR014_CODECHECKING.exe
+D:\Ứng dụng Visual Studio\qrcode_set\qrcode_set\obj\Debug\QR014_CODECHECKING.xml
+D:\Ứng dụng Visual Studio\qrcode_set\qrcode_set\obj\Debug\QR014_CODECHECKING.pdb

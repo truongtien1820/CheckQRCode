@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+    <configSections>
+        <sectionGroup name="userSettings" type="System.Configuration.UserSettingsGroup, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+            <section name="QR014_CODECHECKING.My.MySettings" type="System.Configuration.ClientSettingsSection, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" allowExeDefinition="MachineToLocalUser" requirePermission="false"/>
+        </sectionGroup>
+    </configSections>
+    <startup>
+        <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.5.2"/>
+    </startup>
+    <userSettings>
+        <QR014_CODECHECKING.My.MySettings>
+            <setting name="txt_IP" serializeAs="String">
+                <value />
+            </setting>
+            <setting name="txt_noidung" serializeAs="String">
+                <value />
+            </setting>
+            <setting name="code_detail" serializeAs="String">
+                <value>0</value>
+            </setting>
+            <setting name="h1a" serializeAs="String">
+                <value />
+            </setting>
+            <setting name="b_h1" serializeAs="String">
+                <value />
+            </setting>
+            <setting name="b_m1" serializeAs="String">
+                <value />
+            </setting>
+            <setting name="e_h1" serializeAs="String">
+                <value />
+            </setting>
+            <setting name="e_m1" serializeAs="String">
+                <value />
+            </setting>
+            <setting name="b_h2" serializeAs="String">
+                <value />
+            </setting>
+            <setting name="b_m2" serializeAs="String">
+                <value />
+            </setting>
+            <setting name="e_h2" serializeAs="String">
+                <value />
+            </setting>
+            <setting name="e_m2" serializeAs="String">
+                <value />
+            </setting>
+            <setting name="matrix8010" serializeAs="String">
+                <value />
+            </setting>
+            <setting name="matrix8011" serializeAs="String">
+                <value />
+            </setting>
+            <setting name="matrix90" serializeAs="String">
+                <value />
+            </setting>
+            <setting name="matrix91" serializeAs="String">
+                <value />
+            </setting>
+            <setting name="matrix92" serializeAs="String">
+                <value />
+            </setting>
+            <setting name="matrix93" serializeAs="String">
+                <value />
+            </setting>
+            <setting name="matrix94" serializeAs="String">
+                <value />
+            </setting>
+            <setting name="matrix95" serializeAs="String">
+                <value />
+            </setting>
+            <setting name="qrcode90" serializeAs="String">
+                <value />
+            </setting>
+            <setting name="qrcode91" serializeAs="String">
+                <value />
+            </setting>
+            <setting name="qrcode92" serializeAs="String">
+                <value />
+            </setting>
+            <setting name="qrcode93" serializeAs="String">
+                <value />
+            </setting>
+            <setting name="qrcode94" serializeAs="String">
+                <value />
+            </setting>
+            <setting name="qrcode95" serializeAs="String">
+                <value />
+            </setting>
+            <setting name="matrix96" serializeAs="String">
+                <value />
+            </setting>
+            <setting name="IP" serializeAs="String">
+                <value />
+            </setting>
+            <setting name="greenlighttime" serializeAs="String">
+                <value>1</value>
+            </setting>
+            <setting name="redligthtime" serializeAs="String">
+                <value>1</value>
+            </setting>
+        </QR014_CODECHECKING.My.MySettings>
+    </userSettings>
+</configuration>

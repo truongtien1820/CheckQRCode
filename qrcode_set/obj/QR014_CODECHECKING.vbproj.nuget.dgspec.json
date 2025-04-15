@@ -1,0 +1,92 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\it_09\\Desktop\\Tien\\2024\\QR014\\qrcode_set\\QR014_CODECHECKING.vbproj": {}
+  },
+  "projects": {
+    "C:\\Users\\it_09\\Desktop\\Tien\\2024\\QR014\\qrcode_set\\QR014_CODECHECKING.vbproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\it_09\\Desktop\\Tien\\2024\\QR014\\qrcode_set\\QR014_CODECHECKING.vbproj",
+        "projectName": "QR014_CODECHECKING",
+        "projectPath": "C:\\Users\\it_09\\Desktop\\Tien\\2024\\QR014\\qrcode_set\\QR014_CODECHECKING.vbproj",
+        "packagesPath": "C:\\Users\\it_09\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\it_09\\Desktop\\Tien\\2024\\QR014\\qrcode_set\\obj\\",
+        "projectStyle": "PackageReference",
+        "skipContentFileWrite": true,
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\it_09\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net452"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net452": {
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "net452": {
+          "dependencies": {
+            "Oracle.ManagedDataAccess": {
+              "target": "Package",
+              "version": "[19.18.0, )"
+            },
+            "QRCoder": {
+              "target": "Package",
+              "version": "[1.4.2, )"
+            },
+            "SQLite": {
+              "target": "Package",
+              "version": "[3.13.0, )"
+            },
+            "SQLite.Interop.dll": {
+              "target": "Package",
+              "version": "[1.0.103, )"
+            },
+            "System.Data.SQLite": {
+              "target": "Package",
+              "version": "[1.0.117, )"
+            },
+            "System.Data.SQLite.Core": {
+              "target": "Package",
+              "version": "[1.0.118, )"
+            },
+            "System.Net.Primitives": {
+              "target": "Package",
+              "version": "[4.3.1, )"
+            },
+            "ZXing.Net": {
+              "target": "Package",
+              "version": "[0.16.0, )"
+            }
+          }
+        }
+      },
+      "runtimes": {
+        "win": {
+          "#import": []
+        },
+        "win-arm64": {
+          "#import": []
+        },
+        "win-x64": {
+          "#import": []
+        },
+        "win-x86": {
+          "#import": []
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,8 @@
+C:\Users\it_09\Desktop\QR014_CODECHECKING\qrcode_set\obj\x86\Debug\QR014_CODECHECKING.vbproj.AssemblyReference.cache
+C:\Users\it_09\Desktop\QR014_CODECHECKING\qrcode_set\obj\x86\Debug\QR014_CODECHECKING.vbproj.ResolveComReference.cache
+C:\Users\it_09\Desktop\QR014_CODECHECKING\qrcode_set\obj\x86\Debug\QR014_CODECHECKING.qrcode_manage.resources
+C:\Users\it_09\Desktop\QR014_CODECHECKING\qrcode_set\obj\x86\Debug\QR014_CODECHECKING.qrcode_set.resources
+C:\Users\it_09\Desktop\QR014_CODECHECKING\qrcode_set\obj\x86\Debug\QR014_CODECHECKING.Resources.resources
+C:\Users\it_09\Desktop\QR014_CODECHECKING\qrcode_set\obj\x86\Debug\QR014_CODECHECKING.qrcode_setting.resources
+C:\Users\it_09\Desktop\QR014_CODECHECKING\qrcode_set\obj\x86\Debug\QR014_CODECHECKING.vbproj.GenerateResource.cache
+C:\Users\it_09\Desktop\QR014_CODECHECKING\qrcode_set\obj\x86\Debug\QR014_CODECHECKING.vbproj.CoreCompileInputs.cache

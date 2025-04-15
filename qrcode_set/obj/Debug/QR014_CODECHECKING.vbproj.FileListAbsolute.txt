@@ -1,0 +1,193 @@
+D:\Ứng dụng Visual Studio\qrcode_set\qrcode_set\bin\Debug\QR014_CODECHECKING.exe.config
+D:\Ứng dụng Visual Studio\qrcode_set\qrcode_set\bin\Debug\QR014_CODECHECKING.exe.manifest
+D:\Ứng dụng Visual Studio\qrcode_set\qrcode_set\bin\Debug\QR014_CODECHECKING.application
+D:\Ứng dụng Visual Studio\qrcode_set\qrcode_set\bin\Debug\QR014_CODECHECKING.exe
+D:\Ứng dụng Visual Studio\qrcode_set\qrcode_set\bin\Debug\QR014_CODECHECKING.pdb
+D:\Ứng dụng Visual Studio\qrcode_set\qrcode_set\bin\Debug\QR014_CODECHECKING.xml
+D:\Ứng dụng Visual Studio\qrcode_set\qrcode_set\bin\Debug\EntityFramework.SqlServer.dll
+D:\Ứng dụng Visual Studio\qrcode_set\qrcode_set\bin\Debug\EntityFramework.dll
+D:\Ứng dụng Visual Studio\qrcode_set\qrcode_set\bin\Debug\QRCoder.dll
+D:\Ứng dụng Visual Studio\qrcode_set\qrcode_set\bin\Debug\System.Data.SQLite.dll
+D:\Ứng dụng Visual Studio\qrcode_set\qrcode_set\bin\Debug\System.Data.SQLite.EF6.dll
+D:\Ứng dụng Visual Studio\qrcode_set\qrcode_set\bin\Debug\System.Data.SQLite.Linq.dll
+D:\Ứng dụng Visual Studio\qrcode_set\qrcode_set\bin\Debug\zxing.dll
+D:\Ứng dụng Visual Studio\qrcode_set\qrcode_set\bin\Debug\zxing.presentation.dll
+D:\Ứng dụng Visual Studio\qrcode_set\qrcode_set\obj\Debug\QR014_CODECHECKING.vbproj.AssemblyReference.cache
+D:\Ứng dụng Visual Studio\qrcode_set\qrcode_set\obj\Debug\QR014_CODECHECKING.vbproj.ResolveComReference.cache
+D:\Ứng dụng Visual Studio\qrcode_set\qrcode_set\obj\Debug\QR014_CODECHECKING.qrcode_manage.resources
+D:\Ứng dụng Visual Studio\qrcode_set\qrcode_set\obj\Debug\QR014_CODECHECKING.qrcode_set.resources
+D:\Ứng dụng Visual Studio\qrcode_set\qrcode_set\obj\Debug\QR014_CODECHECKING.Resources.resources
+D:\Ứng dụng Visual Studio\qrcode_set\qrcode_set\obj\Debug\QR014_CODECHECKING.qrcode_setting.resources
+D:\Ứng dụng Visual Studio\qrcode_set\qrcode_set\obj\Debug\QR014_CODECHECKING.vbproj.GenerateResource.cache
+D:\Ứng dụng Visual Studio\qrcode_set\qrcode_set\obj\Debug\QR014_CODECHECKING.vbproj.CoreCompileInputs.cache
+D:\Ứng dụng Visual Studio\qrcode_set\qrcode_set\obj\Debug\QR014_CODECHECKING.exe.manifest
+D:\Ứng dụng Visual Studio\qrcode_set\qrcode_set\obj\Debug\QR014_CODECHECKING.application
+D:\Ứng dụng Visual Studio\qrcode_set\qrcode_set\obj\Debug\QR014_CODECHECKING.vbproj.CopyComplete
+D:\Ứng dụng Visual Studio\qrcode_set\qrcode_set\obj\Debug\QR014_CODECHECKING.exe
+D:\Ứng dụng Visual Studio\qrcode_set\qrcode_set\obj\Debug\QR014_CODECHECKING.xml
+D:\Ứng dụng Visual Studio\qrcode_set\qrcode_set\obj\Debug\QR014_CODECHECKING.pdb
+D:\Ứng dụng Visual Studio\qrcode_set\qrcode_set\bin\Debug\sqldb.vb
+C:\Users\haipr\OneDrive\Máy tính\QR014_CODECHECKING\qrcode_set\bin\Debug\sqldb.vb
+C:\Users\haipr\OneDrive\Máy tính\QR014_CODECHECKING\qrcode_set\bin\Debug\QR014_CODECHECKING.exe.config
+C:\Users\haipr\OneDrive\Máy tính\QR014_CODECHECKING\qrcode_set\bin\Debug\QR014_CODECHECKING.exe.manifest
+C:\Users\haipr\OneDrive\Máy tính\QR014_CODECHECKING\qrcode_set\bin\Debug\QR014_CODECHECKING.application
+C:\Users\haipr\OneDrive\Máy tính\QR014_CODECHECKING\qrcode_set\bin\Debug\QR014_CODECHECKING.exe
+C:\Users\haipr\OneDrive\Máy tính\QR014_CODECHECKING\qrcode_set\bin\Debug\QR014_CODECHECKING.pdb
+C:\Users\haipr\OneDrive\Máy tính\QR014_CODECHECKING\qrcode_set\bin\Debug\QR014_CODECHECKING.xml
+C:\Users\haipr\OneDrive\Máy tính\QR014_CODECHECKING\qrcode_set\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\haipr\OneDrive\Máy tính\QR014_CODECHECKING\qrcode_set\bin\Debug\EntityFramework.dll
+C:\Users\haipr\OneDrive\Máy tính\QR014_CODECHECKING\qrcode_set\bin\Debug\QRCoder.dll
+C:\Users\haipr\OneDrive\Máy tính\QR014_CODECHECKING\qrcode_set\bin\Debug\System.Data.SQLite.dll
+C:\Users\haipr\OneDrive\Máy tính\QR014_CODECHECKING\qrcode_set\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\haipr\OneDrive\Máy tính\QR014_CODECHECKING\qrcode_set\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\haipr\OneDrive\Máy tính\QR014_CODECHECKING\qrcode_set\bin\Debug\zxing.dll
+C:\Users\haipr\OneDrive\Máy tính\QR014_CODECHECKING\qrcode_set\bin\Debug\zxing.presentation.dll
+C:\Users\haipr\OneDrive\Máy tính\QR014_CODECHECKING\qrcode_set\obj\Debug\QR014_CODECHECKING.vbproj.AssemblyReference.cache
+C:\Users\haipr\OneDrive\Máy tính\QR014_CODECHECKING\qrcode_set\obj\Debug\QR014_CODECHECKING.vbproj.ResolveComReference.cache
+C:\Users\haipr\OneDrive\Máy tính\QR014_CODECHECKING\qrcode_set\obj\Debug\QR014_CODECHECKING.qrcode_manage.resources
+C:\Users\haipr\OneDrive\Máy tính\QR014_CODECHECKING\qrcode_set\obj\Debug\QR014_CODECHECKING.qrcode_set.resources
+C:\Users\haipr\OneDrive\Máy tính\QR014_CODECHECKING\qrcode_set\obj\Debug\QR014_CODECHECKING.Resources.resources
+C:\Users\haipr\OneDrive\Máy tính\QR014_CODECHECKING\qrcode_set\obj\Debug\QR014_CODECHECKING.qrcode_setting.resources
+C:\Users\haipr\OneDrive\Máy tính\QR014_CODECHECKING\qrcode_set\obj\Debug\QR014_CODECHECKING.vbproj.GenerateResource.cache
+C:\Users\haipr\OneDrive\Máy tính\QR014_CODECHECKING\qrcode_set\obj\Debug\QR014_CODECHECKING.vbproj.CoreCompileInputs.cache
+C:\Users\haipr\OneDrive\Máy tính\QR014_CODECHECKING\qrcode_set\obj\Debug\QR014_CODECHECKING.exe.manifest
+C:\Users\haipr\OneDrive\Máy tính\QR014_CODECHECKING\qrcode_set\obj\Debug\QR014_CODECHECKING.application
+C:\Users\haipr\OneDrive\Máy tính\QR014_CODECHECKING\qrcode_set\obj\Debug\QR014_CODECHECKING.vbproj.CopyComplete
+C:\Users\haipr\OneDrive\Máy tính\QR014_CODECHECKING\qrcode_set\obj\Debug\QR014_CODECHECKING.exe
+C:\Users\haipr\OneDrive\Máy tính\QR014_CODECHECKING\qrcode_set\obj\Debug\QR014_CODECHECKING.xml
+C:\Users\haipr\OneDrive\Máy tính\QR014_CODECHECKING\qrcode_set\obj\Debug\QR014_CODECHECKING.pdb
+D:\Ứng dụng Visual Studio\QR014_CODECHECKING\qrcode_set\bin\Debug\sqldb.vb
+D:\Ứng dụng Visual Studio\QR014_CODECHECKING\qrcode_set\bin\Debug\QR014_CODECHECKING.exe.config
+D:\Ứng dụng Visual Studio\QR014_CODECHECKING\qrcode_set\bin\Debug\QR014_CODECHECKING.exe.manifest
+D:\Ứng dụng Visual Studio\QR014_CODECHECKING\qrcode_set\bin\Debug\QR014_CODECHECKING.application
+D:\Ứng dụng Visual Studio\QR014_CODECHECKING\qrcode_set\bin\Debug\QR014_CODECHECKING.exe
+D:\Ứng dụng Visual Studio\QR014_CODECHECKING\qrcode_set\bin\Debug\QR014_CODECHECKING.pdb
+D:\Ứng dụng Visual Studio\QR014_CODECHECKING\qrcode_set\bin\Debug\QR014_CODECHECKING.xml
+D:\Ứng dụng Visual Studio\QR014_CODECHECKING\qrcode_set\bin\Debug\EntityFramework.SqlServer.dll
+D:\Ứng dụng Visual Studio\QR014_CODECHECKING\qrcode_set\bin\Debug\EntityFramework.dll
+D:\Ứng dụng Visual Studio\QR014_CODECHECKING\qrcode_set\bin\Debug\QRCoder.dll
+D:\Ứng dụng Visual Studio\QR014_CODECHECKING\qrcode_set\bin\Debug\System.Data.SQLite.dll
+D:\Ứng dụng Visual Studio\QR014_CODECHECKING\qrcode_set\bin\Debug\System.Data.SQLite.EF6.dll
+D:\Ứng dụng Visual Studio\QR014_CODECHECKING\qrcode_set\bin\Debug\System.Data.SQLite.Linq.dll
+D:\Ứng dụng Visual Studio\QR014_CODECHECKING\qrcode_set\bin\Debug\zxing.dll
+D:\Ứng dụng Visual Studio\QR014_CODECHECKING\qrcode_set\bin\Debug\zxing.presentation.dll
+D:\Ứng dụng Visual Studio\QR014_CODECHECKING\qrcode_set\obj\Debug\QR014_CODECHECKING.vbproj.ResolveComReference.cache
+D:\Ứng dụng Visual Studio\QR014_CODECHECKING\qrcode_set\obj\Debug\QR014_CODECHECKING.qrcode_manage.resources
+D:\Ứng dụng Visual Studio\QR014_CODECHECKING\qrcode_set\obj\Debug\QR014_CODECHECKING.qrcode_set.resources
+D:\Ứng dụng Visual Studio\QR014_CODECHECKING\qrcode_set\obj\Debug\QR014_CODECHECKING.Resources.resources
+D:\Ứng dụng Visual Studio\QR014_CODECHECKING\qrcode_set\obj\Debug\QR014_CODECHECKING.qrcode_setting.resources
+D:\Ứng dụng Visual Studio\QR014_CODECHECKING\qrcode_set\obj\Debug\QR014_CODECHECKING.vbproj.GenerateResource.cache
+D:\Ứng dụng Visual Studio\QR014_CODECHECKING\qrcode_set\obj\Debug\QR014_CODECHECKING.vbproj.CoreCompileInputs.cache
+D:\Ứng dụng Visual Studio\QR014_CODECHECKING\qrcode_set\obj\Debug\QR014_CODECHECKING.exe.manifest
+D:\Ứng dụng Visual Studio\QR014_CODECHECKING\qrcode_set\obj\Debug\QR014_CODECHECKING.application
+D:\Ứng dụng Visual Studio\QR014_CODECHECKING\qrcode_set\obj\Debug\QR014_CODECHECKING.vbproj.CopyComplete
+D:\Ứng dụng Visual Studio\QR014_CODECHECKING\qrcode_set\obj\Debug\QR014_CODECHECKING.exe
+D:\Ứng dụng Visual Studio\QR014_CODECHECKING\qrcode_set\obj\Debug\QR014_CODECHECKING.xml
+D:\Ứng dụng Visual Studio\QR014_CODECHECKING\qrcode_set\obj\Debug\QR014_CODECHECKING.pdb
+D:\Ứng dụng Visual Studio\QR014_CODECHECKING\qrcode_set\obj\Debug\QR014_CODECHECKING.vbproj.AssemblyReference.cache
+D:\Ứng dụng Visual Studio\QR014_CODECHECKING\qrcode_set\bin\Debug\Communication.dll
+D:\Ứng dụng Visual Studio\QR014_CODECHECKING\qrcode_set\bin\Debug\Keyence.AutoID.SDK.dll
+D:\Ứng dụng Visual Studio\QR014_CODECHECKING\qrcode_set\bin\Debug\VncClientControlCommon.dll
+D:\Ứng dụng Visual Studio\QR014_CODECHECKING\qrcode_set\bin\Debug\VncClientControlCommonLib.dll
+D:\Ứng dụng Visual Studio\QR014_CODECHECKING\qrcode_set\bin\Debug\Oracle.ManagedDataAccess.dll
+C:\Users\it_09\Desktop\QR014_CODECHECKING\qrcode_set\bin\Debug\sqldb.vb
+C:\Users\it_09\Desktop\QR014_CODECHECKING\qrcode_set\bin\Debug\QR014_CODECHECKING.exe.config
+C:\Users\it_09\Desktop\QR014_CODECHECKING\qrcode_set\bin\Debug\QR014_CODECHECKING.exe.manifest
+C:\Users\it_09\Desktop\QR014_CODECHECKING\qrcode_set\bin\Debug\QR014_CODECHECKING.application
+C:\Users\it_09\Desktop\QR014_CODECHECKING\qrcode_set\bin\Debug\QR014_CODECHECKING.exe
+C:\Users\it_09\Desktop\QR014_CODECHECKING\qrcode_set\bin\Debug\QR014_CODECHECKING.pdb
+C:\Users\it_09\Desktop\QR014_CODECHECKING\qrcode_set\bin\Debug\QR014_CODECHECKING.xml
+C:\Users\it_09\Desktop\QR014_CODECHECKING\qrcode_set\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\it_09\Desktop\QR014_CODECHECKING\qrcode_set\bin\Debug\EntityFramework.dll
+C:\Users\it_09\Desktop\QR014_CODECHECKING\qrcode_set\bin\Debug\Oracle.ManagedDataAccess.dll
+C:\Users\it_09\Desktop\QR014_CODECHECKING\qrcode_set\bin\Debug\QRCoder.dll
+C:\Users\it_09\Desktop\QR014_CODECHECKING\qrcode_set\bin\Debug\System.Data.SQLite.dll
+C:\Users\it_09\Desktop\QR014_CODECHECKING\qrcode_set\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\it_09\Desktop\QR014_CODECHECKING\qrcode_set\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\it_09\Desktop\QR014_CODECHECKING\qrcode_set\bin\Debug\zxing.dll
+C:\Users\it_09\Desktop\QR014_CODECHECKING\qrcode_set\bin\Debug\zxing.presentation.dll
+C:\Users\it_09\Desktop\QR014_CODECHECKING\qrcode_set\obj\Debug\QR014_CODECHECKING.vbproj.AssemblyReference.cache
+C:\Users\it_09\Desktop\QR014_CODECHECKING\qrcode_set\obj\Debug\QR014_CODECHECKING.vbproj.ResolveComReference.cache
+C:\Users\it_09\Desktop\QR014_CODECHECKING\qrcode_set\obj\Debug\QR014_CODECHECKING.qrcode_manage.resources
+C:\Users\it_09\Desktop\QR014_CODECHECKING\qrcode_set\obj\Debug\QR014_CODECHECKING.qrcode_set.resources
+C:\Users\it_09\Desktop\QR014_CODECHECKING\qrcode_set\obj\Debug\QR014_CODECHECKING.Resources.resources
+C:\Users\it_09\Desktop\QR014_CODECHECKING\qrcode_set\obj\Debug\QR014_CODECHECKING.qrcode_setting.resources
+C:\Users\it_09\Desktop\QR014_CODECHECKING\qrcode_set\obj\Debug\QR014_CODECHECKING.vbproj.GenerateResource.cache
+C:\Users\it_09\Desktop\QR014_CODECHECKING\qrcode_set\obj\Debug\QR014_CODECHECKING.vbproj.CoreCompileInputs.cache
+C:\Users\it_09\Desktop\QR014_CODECHECKING\qrcode_set\obj\Debug\QR014_CODECHECKING.exe.manifest
+C:\Users\it_09\Desktop\QR014_CODECHECKING\qrcode_set\obj\Debug\QR014_CODECHECKING.application
+C:\Users\it_09\Desktop\QR014_CODECHECKING\qrcode_set\obj\Debug\QR014_CODECHECKING.vbproj.CopyComplete
+C:\Users\it_09\Desktop\QR014_CODECHECKING\qrcode_set\obj\Debug\QR014_CODECHECKING.exe
+C:\Users\it_09\Desktop\QR014_CODECHECKING\qrcode_set\obj\Debug\QR014_CODECHECKING.xml
+C:\Users\it_09\Desktop\QR014_CODECHECKING\qrcode_set\obj\Debug\QR014_CODECHECKING.pdb
+C:\Users\it_09\Desktop\QR014_CODECHECKING\qrcode_set\obj\Debug\QR014_CODECHECKING.qrcode_set_size.resources
+C:\Users\it_09\Desktop\Tien\QR014_CODECHECKING\qrcode_set\obj\Debug\QR014_CODECHECKING.vbproj.AssemblyReference.cache
+C:\Users\it_09\Desktop\Tien\QR014_CODECHECKING\qrcode_set\obj\Debug\QR014_CODECHECKING.vbproj.ResolveComReference.cache
+C:\Users\it_09\Desktop\Tien\QR014_CODECHECKING\qrcode_set\obj\Debug\QR014_CODECHECKING.qrcode_manage.resources
+C:\Users\it_09\Desktop\Tien\QR014_CODECHECKING\qrcode_set\obj\Debug\QR014_CODECHECKING.qrcode_set.resources
+C:\Users\it_09\Desktop\Tien\QR014_CODECHECKING\qrcode_set\obj\Debug\QR014_CODECHECKING.Resources.resources
+C:\Users\it_09\Desktop\Tien\QR014_CODECHECKING\qrcode_set\obj\Debug\QR014_CODECHECKING.qrcode_setting.resources
+C:\Users\it_09\Desktop\Tien\QR014_CODECHECKING\qrcode_set\obj\Debug\QR014_CODECHECKING.qrcode_set_size.resources
+C:\Users\it_09\Desktop\Tien\QR014_CODECHECKING\qrcode_set\obj\Debug\QR014_CODECHECKING.vbproj.GenerateResource.cache
+C:\Users\it_09\Desktop\Tien\QR014_CODECHECKING\qrcode_set\obj\Debug\QR014_CODECHECKING.vbproj.CoreCompileInputs.cache
+C:\Users\it_09\Desktop\Tien\QR014_CODECHECKING\qrcode_set\obj\Debug\QR014_CODECHECKING.exe
+C:\Users\it_09\Desktop\Tien\QR014_CODECHECKING\qrcode_set\obj\Debug\QR014_CODECHECKING.xml
+C:\Users\it_09\Desktop\Tien\QR014_CODECHECKING\qrcode_set\obj\Debug\QR014_CODECHECKING.pdb
+C:\Users\it_09\Desktop\Tien\QR014_CODECHECKING\qrcode_set\bin\Debug\sqldb.vb
+C:\Users\it_09\Desktop\Tien\QR014_CODECHECKING\qrcode_set\bin\Debug\QR014_CODECHECKING.exe.config
+C:\Users\it_09\Desktop\Tien\QR014_CODECHECKING\qrcode_set\bin\Debug\QR014_CODECHECKING.exe.manifest
+C:\Users\it_09\Desktop\Tien\QR014_CODECHECKING\qrcode_set\bin\Debug\QR014_CODECHECKING.application
+C:\Users\it_09\Desktop\Tien\QR014_CODECHECKING\qrcode_set\bin\Debug\QR014_CODECHECKING.exe
+C:\Users\it_09\Desktop\Tien\QR014_CODECHECKING\qrcode_set\bin\Debug\QR014_CODECHECKING.pdb
+C:\Users\it_09\Desktop\Tien\QR014_CODECHECKING\qrcode_set\bin\Debug\QR014_CODECHECKING.xml
+C:\Users\it_09\Desktop\Tien\QR014_CODECHECKING\qrcode_set\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\it_09\Desktop\Tien\QR014_CODECHECKING\qrcode_set\bin\Debug\EntityFramework.dll
+C:\Users\it_09\Desktop\Tien\QR014_CODECHECKING\qrcode_set\bin\Debug\Oracle.ManagedDataAccess.dll
+C:\Users\it_09\Desktop\Tien\QR014_CODECHECKING\qrcode_set\bin\Debug\QRCoder.dll
+C:\Users\it_09\Desktop\Tien\QR014_CODECHECKING\qrcode_set\bin\Debug\System.Data.SQLite.dll
+C:\Users\it_09\Desktop\Tien\QR014_CODECHECKING\qrcode_set\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\it_09\Desktop\Tien\QR014_CODECHECKING\qrcode_set\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\it_09\Desktop\Tien\QR014_CODECHECKING\qrcode_set\bin\Debug\zxing.dll
+C:\Users\it_09\Desktop\Tien\QR014_CODECHECKING\qrcode_set\bin\Debug\zxing.presentation.dll
+C:\Users\it_09\Desktop\Tien\QR014_CODECHECKING\qrcode_set\obj\Debug\QR014_CODECHECKING.exe.manifest
+C:\Users\it_09\Desktop\Tien\QR014_CODECHECKING\qrcode_set\obj\Debug\QR014_CODECHECKING.application
+C:\Users\it_09\Desktop\Tien\QR014_CODECHECKING\qrcode_set\obj\Debug\QR014_CODECHECKING.vbproj.CopyComplete
+C:\Users\it_09\Desktop\Tien\QR014_CODECHECKING\qrcode_set\bin\Debug\zxing.pdb
+C:\Users\it_09\Desktop\Tien\QR014_CODECHECKING\qrcode_set\bin\Debug\zxing.presentation.pdb
+C:\Users\it_09\Desktop\Tien\QR014_CODECHECKING\qrcode_set\obj\Debug\QR014_CODECHECKING.qrcode_set_limit.resources
+C:\Users\it_09\Desktop\Tien\QR014_CODECHECKING\qrcode_set\obj\Debug\QR014_CODECHECKING.qrcode_wno.resources
+C:\Users\it_09\Desktop\Tien\2024\QR014\qrcode_set\obj\Debug\QR014_CODECHECKING.vbproj.AssemblyReference.cache
+C:\Users\it_09\Desktop\Tien\2024\QR014\qrcode_set\obj\Debug\QR014_CODECHECKING.vbproj.ResolveComReference.cache
+C:\Users\it_09\Desktop\Tien\2024\QR014\qrcode_set\obj\Debug\QR014_CODECHECKING.qrcode_manage.resources
+C:\Users\it_09\Desktop\Tien\2024\QR014\qrcode_set\obj\Debug\QR014_CODECHECKING.qrcode_set.resources
+C:\Users\it_09\Desktop\Tien\2024\QR014\qrcode_set\obj\Debug\QR014_CODECHECKING.Resources.resources
+C:\Users\it_09\Desktop\Tien\2024\QR014\qrcode_set\obj\Debug\QR014_CODECHECKING.qrcode_setting.resources
+C:\Users\it_09\Desktop\Tien\2024\QR014\qrcode_set\obj\Debug\QR014_CODECHECKING.qrcode_set_limit.resources
+C:\Users\it_09\Desktop\Tien\2024\QR014\qrcode_set\obj\Debug\QR014_CODECHECKING.qrcode_set_size.resources
+C:\Users\it_09\Desktop\Tien\2024\QR014\qrcode_set\obj\Debug\QR014_CODECHECKING.qrcode_productreturn.resources
+C:\Users\it_09\Desktop\Tien\2024\QR014\qrcode_set\obj\Debug\QR014_CODECHECKING.vbproj.GenerateResource.cache
+C:\Users\it_09\Desktop\Tien\2024\QR014\qrcode_set\obj\Debug\QR014_CODECHECKING.vbproj.CoreCompileInputs.cache
+C:\Users\it_09\Desktop\Tien\2024\QR014\qrcode_set\bin\Debug\sqldb.vb
+C:\Users\it_09\Desktop\Tien\2024\QR014\qrcode_set\bin\Debug\QR014_CODECHECKING.exe.config
+C:\Users\it_09\Desktop\Tien\2024\QR014\qrcode_set\bin\Debug\QR014_CODECHECKING.exe.manifest
+C:\Users\it_09\Desktop\Tien\2024\QR014\qrcode_set\bin\Debug\QR014_CODECHECKING.application
+C:\Users\it_09\Desktop\Tien\2024\QR014\qrcode_set\bin\Debug\QR014_CODECHECKING.exe
+C:\Users\it_09\Desktop\Tien\2024\QR014\qrcode_set\bin\Debug\QR014_CODECHECKING.pdb
+C:\Users\it_09\Desktop\Tien\2024\QR014\qrcode_set\bin\Debug\QR014_CODECHECKING.xml
+C:\Users\it_09\Desktop\Tien\2024\QR014\qrcode_set\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\it_09\Desktop\Tien\2024\QR014\qrcode_set\bin\Debug\EntityFramework.dll
+C:\Users\it_09\Desktop\Tien\2024\QR014\qrcode_set\bin\Debug\Oracle.ManagedDataAccess.dll
+C:\Users\it_09\Desktop\Tien\2024\QR014\qrcode_set\bin\Debug\QRCoder.dll
+C:\Users\it_09\Desktop\Tien\2024\QR014\qrcode_set\bin\Debug\System.Data.SQLite.dll
+C:\Users\it_09\Desktop\Tien\2024\QR014\qrcode_set\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\it_09\Desktop\Tien\2024\QR014\qrcode_set\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\it_09\Desktop\Tien\2024\QR014\qrcode_set\bin\Debug\zxing.dll
+C:\Users\it_09\Desktop\Tien\2024\QR014\qrcode_set\bin\Debug\zxing.pdb
+C:\Users\it_09\Desktop\Tien\2024\QR014\qrcode_set\bin\Debug\zxing.presentation.dll
+C:\Users\it_09\Desktop\Tien\2024\QR014\qrcode_set\bin\Debug\zxing.presentation.pdb
+C:\Users\it_09\Desktop\Tien\2024\QR014\qrcode_set\obj\Debug\QR014_CODECHECKING.exe.manifest
+C:\Users\it_09\Desktop\Tien\2024\QR014\qrcode_set\obj\Debug\QR014_CODECHECKING.application
+C:\Users\it_09\Desktop\Tien\2024\QR014\qrcode_set\obj\Debug\QR014_CODECHECKING.vbproj.CopyComplete
+C:\Users\it_09\Desktop\Tien\2024\QR014\qrcode_set\obj\Debug\QR014_CODECHECKING.exe
+C:\Users\it_09\Desktop\Tien\2024\QR014\qrcode_set\obj\Debug\QR014_CODECHECKING.xml
+C:\Users\it_09\Desktop\Tien\2024\QR014\qrcode_set\obj\Debug\QR014_CODECHECKING.pdb
