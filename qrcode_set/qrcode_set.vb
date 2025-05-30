@@ -26,6 +26,7 @@ Imports Keyence.AR.VncClient
 Imports ZXing.OneD
 Imports Oracle.ManagedDataAccess.Client
 Imports System.Net
+Imports System.Net.Sockets
 
 Public Class qrcode_set
     Private serialPort As SerialPort
@@ -34,8 +35,10 @@ Public Class qrcode_set
     Private bg_work2 As BackgroundWorker
     Private bg_internet As BackgroundWorker
     Private m_reader As New ReaderAccessor()
+    Private m_readerQR010 As New ReaderAccessor()
     Dim db As New sqldb()
     Dim _font As Integer = 12
+    Public WithEvents server As New SocketServer()
     Private LightTimer As Timers.Timer = Nothing
     Private OnlineStatus_Timer As Timers.Timer = Nothing
     Private autoscanner_Timer As Timers.Timer = Nothing
@@ -49,16 +52,20 @@ Public Class qrcode_set
     Public host As String = Dns.GetHostName() ' Lấy tên máy
     Public ipList As IPAddress() = Dns.GetHostEntry(host).AddressList
     Public local As String
+    Private currentMacode As String = Nothing
+    Private isProcessing As Boolean = False
 
 
     Private Sub qrcode_set_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         For Each ip As IPAddress In ipList
-            If ip.AddressFamily = Net.Sockets.AddressFamily.InterNetwork Then ' Lọc IP v4
+            If ip.AddressFamily = Net.Sockets.AddressFamily.InterNetwork Then
                 local = ip.ToString()
             End If
         Next
+
         Dim credentials As New NetworkCredential("install", "Lelong@2022#")
+        db.alter_table_add_qrcode()
         _calamviec()
         db.delete()
         PictureBox2.Image = Nothing
@@ -85,6 +92,7 @@ Public Class qrcode_set
         bg_internet = New BackgroundWorker()
         AddHandler bg_internet.DoWork, AddressOf backgroundWorker_bg_internet
 
+
         serialPort = New SerialPort()
         serialPort.PortName = "COM6"
         serialPort.BaudRate = 9600
@@ -105,6 +113,9 @@ Public Class qrcode_set
         AddHandler serialPort2.DataReceived, AddressOf SerialPort_DataReceived_2
         AddHandler serialPort.PinChanged, AddressOf serialPort3_PinChanged
         AddHandler serialPort2.PinChanged, AddressOf serialPort3_PinChanged_2
+        AddHandler server.ClientCountChanged, AddressOf UpdateClientCount
+        AddHandler server.DataReceived, AddressOf Socket_QR010
+        server.StartServer(5000)
 
         reload_layout()
 
@@ -135,7 +146,19 @@ Public Class qrcode_set
         Catch ex As Exception
 
         End Try
-        Timer1.Start()
+        Try
+            m_readerQR010.IpAddress = MySettings.Default.IPQR010
+            m_readerQR010.Connect(
+                Sub(data010)
+                    BeginInvoke(New DelegateUserControl(AddressOf ReceivedDataWrite_010), Encoding.ASCII.GetString(data010))
+                End Sub
+            )
+            m_reader.ExecCommand("OUTON,3")
+        Catch ex As Exception
+
+        End Try
+
+        Timer_checksocket.Start()
         lb_count_limit.Text = My.Settings.limit
 
         txt_8010.Text = My.Settings.matrix8010
@@ -198,6 +221,25 @@ Public Class qrcode_set
             Me.BeginInvoke(New UpdateControlColorDelegate(AddressOf _mUpdateControlColor), New Object() {Me.stat_AUTOscanner, Color.DarkRed})
         End Try
 
+        Try
+            Dim pingreply As PingReply = pingSender.Send(MySettings.Default.IPQR010, 1000)
+
+            If pingreply.Status = IPStatus.Success Then
+
+                Me.BeginInvoke(New UpdateControlDelegate(AddressOf _mUpdateControl), New Object() {Me.stat_AUTOscanner010, "QUÉT TỰ ĐỘNG" & vbCrLf & "Đã kết nối"})
+                Me.BeginInvoke(New UpdateControlColorDelegate(AddressOf _mUpdateControlColor), New Object() {Me.stat_AUTOscanner010, Color.Lime})
+
+
+            Else
+                Me.BeginInvoke(New UpdateControlDelegate(AddressOf _mUpdateControl), New Object() {Me.stat_AUTOscanner010, "QUÉT TỰ ĐỘNG" & vbCrLf & "Mất kết nối"})
+                Me.BeginInvoke(New UpdateControlColorDelegate(AddressOf _mUpdateControlColor), New Object() {Me.stat_AUTOscanner010, Color.DarkRed})
+
+            End If
+
+        Catch ex As Exception
+            Me.BeginInvoke(New UpdateControlDelegate(AddressOf _mUpdateControl), New Object() {Me.stat_AUTOscanner010, "QUÉT TỰ ĐỘNG" & vbCrLf & "Mất kết nối"})
+            Me.BeginInvoke(New UpdateControlColorDelegate(AddressOf _mUpdateControlColor), New Object() {Me.stat_AUTOscanner010, Color.DarkRed})
+        End Try
     End Sub
 
     Private Sub backgroundWorker_bg_internet(sender As Object, e As DoWorkEventArgs)
@@ -237,11 +279,21 @@ Public Class qrcode_set
     End Sub
 
     Private Delegate Sub DelegateUserControl(str As String)
+    Private Sub ReceivedDataWrite_010(receivedData010 As String)
+
+        Me.Invoke(Sub()
+                      Scan_content2.Text = receivedData010
+                  End Sub)
+currentMacode = receivedData010
+    End Sub
     Private Sub ReceivedDataWrite(receivedData As String)
         'Thread.Sleep(Double.Parse(MySettings.Default.delay_time) * 1000)
         'máy quét tự động
+
+
+
         Me.Invoke(Sub()
-                      scan_content.Text = receivedData
+                      Scan_content.Text = receivedData
                   End Sub)
 
 
@@ -287,6 +339,49 @@ Public Class qrcode_set
             Me.BeginInvoke(New UpdateControlDelegate(AddressOf _mUpdateControl), New Object() {Me.lb_msg, "Hãy áp dụng thiết lập trước..."})
             Me.BeginInvoke(New UpdateControlColorDelegate(AddressOf _mUpdateControlColor), New Object() {Me.lb_msg, Color.Red})
             Return
+        End If
+        If MySettings.Default.connect = "True" Then
+            ' Trạng thái 1: Dùng socket
+            If String.IsNullOrEmpty(currentMacode) OrElse currentMacode = "ERROR" Then
+                Me.BeginInvoke(New UpdateControlDelegate(AddressOf _mUpdateControl), New Object() {Me.lb_msg, "Không có QR code của QR010 (Socket)"})
+                Me.BeginInvoke(New UpdateControlColorDelegate(AddressOf _mUpdateControlColor), New Object() {Me.lb_msg, Color.Red})
+                open_Light("Red")
+                Return
+            ElseIf db.CheckDuplicateQRCode(currentMacode) = 1 Then
+                Me.BeginInvoke(New UpdateControlDelegate(AddressOf _mUpdateControl), New Object() {Me.lb_msg, "Trùng Lặp QRcode010 (Socket)"})
+                Me.BeginInvoke(New UpdateControlColorDelegate(AddressOf _mUpdateControlColor), New Object() {Me.lb_msg, Color.Red})
+                currentMacode = Nothing
+                open_Light("Red")
+                Return
+            End If
+
+        Else
+            ' Trạng thái 2 hoặc 3
+            Dim pingQR010 As New Ping()
+            Dim pingReplyQR010 As PingReply = Nothing
+            Try
+                pingReplyQR010 = pingQR010.Send(MySettings.Default.IPQR010, 1000)
+            Catch
+                ' Bỏ qua lỗi ping nếu có
+            End Try
+
+            If pingReplyQR010 IsNot Nothing AndAlso pingReplyQR010.Status = IPStatus.Success Then
+                ' Trạng thái 2: Dùng thiết bị QR010
+                If String.IsNullOrEmpty(currentMacode) OrElse currentMacode = "ERROR" Then
+                    Me.BeginInvoke(New UpdateControlDelegate(AddressOf _mUpdateControl), New Object() {Me.lb_msg, "Không có QR010 từ thiết bị"})
+                    Me.BeginInvoke(New UpdateControlColorDelegate(AddressOf _mUpdateControlColor), New Object() {Me.lb_msg, Color.Red})
+                    open_Light("Red")
+                    Return
+                ElseIf db.CheckDuplicateQRCode(currentMacode) = 1 Then
+                    Me.BeginInvoke(New UpdateControlDelegate(AddressOf _mUpdateControl), New Object() {Me.lb_msg, "Trùng Lặp QRcode010 từ thiết bị"})
+                    Me.BeginInvoke(New UpdateControlColorDelegate(AddressOf _mUpdateControlColor), New Object() {Me.lb_msg, Color.Red})
+                    currentMacode = Nothing
+                    open_Light("Red")
+                    Return
+                End If
+            Else
+
+            End If
         End If
         Me.Invoke(Sub()
                       txt_8010.BackColor = Color.White
@@ -645,6 +740,7 @@ Public Class qrcode_set
             Dim args As Tuple(Of String, String) = New Tuple(Of String, String)(receivedData_2, "N")
             bg_work.RunWorkerAsync(args)
         End If
+
         'bg_work.RunWorkerAsync(receivedData_2)
     End Sub
 
@@ -744,7 +840,7 @@ Public Class qrcode_set
                 Dim command = conn.CreateCommand()
                 dgv_data.Rows.Clear()
                 dgv_data_check.Rows.Clear()
-                command.CommandText = "SELECT thoigian,macode,loai FROM laser_table WHERE thoigian >= '" & bdate & "' AND thoigian <= '" & edate & "' AND phanloai = '" & _phanloai & "' AND macode LIKE '%" & _quycach & "%' ;"
+                command.CommandText = "SELECT thoigian,macode,loai,qrcode_010 FROM laser_table WHERE thoigian >= '" & bdate & "' AND thoigian <= '" & edate & "' AND phanloai = '" & _phanloai & "' AND macode LIKE '%" & _quycach & "%' ;"
                 'command.Parameters.AddWithValue("@startDateTime", bdate) ' Ngày và giờ bắt đầu
                 'command.Parameters.AddWithValue("@endDateTime", edate) '
                 Using reader = command.ExecuteReader()
@@ -752,7 +848,8 @@ Public Class qrcode_set
                         Dim thoigian As String = reader.GetString(0)
                         Dim macode As String = reader.GetString(1)
                         Dim loai As String = reader.GetString(2)
-                        Dim rowData As Object() = {thoigian, macode}
+                        Dim qrcode_010 As String = reader.GetString(3)
+                        Dim rowData As Object() = {thoigian, macode, qrcode_010}
                         AddDataToDataGridView(rowData)
                     End While
                     Me.BeginInvoke(New UpdateControlDelegate(AddressOf _mUpdateControl), New Object() {lb_count, dgv_data.Rows.Count().ToString()})
@@ -777,11 +874,13 @@ Public Class qrcode_set
         End Try
     End Sub
     Private Sub SerialPort_DataReceived(sender As Object, e As SerialDataReceivedEventArgs)
-        'Thread.Sleep(Double.Parse(MySettings.Default.delay_time) * 1000)
-        'máy quét cầm tay 
+        ''Thread.Sleep(Double.Parse(MySettings.Default.delay_time) * 1000)
+        ''máy quét cầm tay 
         Dim receivedData As String = serialPort.ReadExisting()
+
+
         Me.Invoke(Sub()
-                      scan_content.Text = receivedData
+                      Scan_content.Text = receivedData
                   End Sub)
         Dim key As String = ControlChars.Cr
         Dim leght_size As Integer = receivedData.IndexOf(key)
@@ -791,7 +890,7 @@ Public Class qrcode_set
 
 
         receivedData = Regex.Replace(receivedData, "\r\n|\n|\r|", "") 'ChrW(29)
-        If btn_apply.Enabled = True Then
+        If btn_apply.Enabled = True And Not receivedData.StartsWith("BC") Then
             If Not receivedData = "ERROR" AndAlso MySettings.Default.code_detail = "DATA MATRIX" AndAlso receivedData.Substring(0, 4) <> "LONG" Then
 
                 qrcode_set_size.qrcode_substr(receivedData)
@@ -826,375 +925,401 @@ Public Class qrcode_set
                           End Sub)
 
             End If
-
-
-            Dim soundPlayer As New SoundPlayer(My.Resources.sound_accept())
-            soundPlayer.Play()
-
-            Me.BeginInvoke(New UpdateControlDelegate(AddressOf _mUpdateControl), New Object() {Me.lb_msg, "Hãy áp dụng thiết lập trước..."})
-            Me.BeginInvoke(New UpdateControlColorDelegate(AddressOf _mUpdateControlColor), New Object() {Me.lb_msg, Color.Red})
-
-            Return
-        End If
-        Me.Invoke(Sub()
-
-                      txt_8010.BackColor = Color.White
-                      txt_8011.BackColor = Color.White
-                      txt_90.BackColor = Color.White
-                      txt_91.BackColor = Color.White
-                      txt_92.BackColor = Color.White
-                      txt_93.BackColor = Color.White
-                      txt_94.BackColor = Color.White
-                      txt_95.BackColor = Color.White
-                      txt_96.BackColor = Color.White
-                      txt_97.BackColor = Color.White
-                      qr_90.BackColor = Color.White
-                      qr_91.BackColor = Color.White
-                      qr_92.BackColor = Color.White
-                      qr_93.BackColor = Color.White
-                      qr_94.BackColor = Color.White
-                      qr_95.BackColor = Color.White
-                      qr_96.BackColor = Color.White
-                  End Sub)
-        Dim receivedData_2 As String = receivedData
-        If btn_apply.Enabled = True Then
-            Dim soundPlayer As New SoundPlayer(My.Resources.sound_accept())
-            soundPlayer.Play()
-
-            Return
-
-        End If
-        If MySettings.Default.code_detail = "DATA MATRIX" Then
-            If btn_apply.Enabled = False And Not String.IsNullOrEmpty(txt_97.Text) And lb_class.Visible = False Then
-                Me.Invoke(Sub()
-                              Label25.Visible = True
-                              lb_class.Visible = True
-
-
-
-
-                          End Sub)
-            ElseIf btn_apply.Enabled = False And String.IsNullOrEmpty(txt_97.Text) And lb_class.Visible = True Then
-                Me.Invoke(Sub()
-                              Label25.Visible = False
-                              lb_class.Visible = False
-
-
-
-                          End Sub)
-            End If
-
-        Else
-            If btn_apply.Enabled = False And Not String.IsNullOrEmpty(qr_96.Text) And lb_class.Visible = False Then
-                Me.Invoke(Sub()
-                              Label25.Visible = True
-                              lb_class.Visible = True
-
-
-
-                          End Sub)
-            ElseIf btn_apply.Enabled = False And String.IsNullOrEmpty(qr_96.Text) And lb_class.Visible = True Then
-                Me.Invoke(Sub()
-                              Label25.Visible = False
-                              lb_class.Visible = False
-
-                          End Sub)
-            End If
-
-        End If
-        Dim matrix_err As Boolean = True
-        Dim qrcode_err As Boolean = True
-        If MySettings.Default.code_detail = "DATA MATRIX" Then
-
-            Dim codelist As String()
-            codelist = receivedData.Split(ChrW(29))
-            Dim Index As Integer = 0
-            For Each code As String In codelist
-                Index += 1
+            If MySettings.Default.connect = "False" Then
                 Try
+                    Dim pingQR010 As New Ping()
+                    Dim pingReply As PingReply = pingQR010.Send(MySettings.Default.IPQR010, 1000)
+                    If pingReply.Status = IPStatus.Success Then
+                        ' QR010 vẫn đang online → không xử lý COM6
+                        Return
+                    End If
+                Catch ex As Exception
+                    ' Nếu ping lỗi thì bỏ qua => tiếp tục xử lý như bình thường
+                End Try
+
+                Dim soundPlayer As New SoundPlayer(My.Resources.sound_accept())
+                soundPlayer.Play()
+
+                Me.BeginInvoke(New UpdateControlDelegate(AddressOf _mUpdateControl), New Object() {Me.lb_msg, "Hãy áp dụng thiết lập trước..."})
+                Me.BeginInvoke(New UpdateControlColorDelegate(AddressOf _mUpdateControlColor), New Object() {Me.lb_msg, Color.Red})
 
 
-                    If Index = 1 Then
-                        If Not code.Equals(txt_8010.Text) Then
-                            matrix_err = False
-                            Me.Invoke(Sub()
-                                          txt_8010.BackColor = Color.Red
-                                      End Sub)
+            End If
+            Return
+
+        End If
+        If MySettings.Default.connect = "False" Then
+            Try
+                Dim pingQR010 As New Ping()
+                Dim pingReply As PingReply = pingQR010.Send(MySettings.Default.IPQR010, 1000)
+                If pingReply.Status = IPStatus.Success Then
+                    ' QR010 vẫn đang online → không xử lý COM6
+                    Return
+                End If
+            Catch ex As Exception
+                ' Nếu ping lỗi thì bỏ qua => tiếp tục xử lý như bình thường
+            End Try
+
+            Me.Invoke(Sub()
+
+                          txt_8010.BackColor = Color.White
+                          txt_8011.BackColor = Color.White
+                          txt_90.BackColor = Color.White
+                          txt_91.BackColor = Color.White
+                          txt_92.BackColor = Color.White
+                          txt_93.BackColor = Color.White
+                          txt_94.BackColor = Color.White
+                          txt_95.BackColor = Color.White
+                          txt_96.BackColor = Color.White
+                          txt_97.BackColor = Color.White
+                          qr_90.BackColor = Color.White
+                          qr_91.BackColor = Color.White
+                          qr_92.BackColor = Color.White
+                          qr_93.BackColor = Color.White
+                          qr_94.BackColor = Color.White
+                          qr_95.BackColor = Color.White
+                          qr_96.BackColor = Color.White
+                      End Sub)
+            Dim receivedData_2 As String = receivedData
+            If btn_apply.Enabled = True Then
+                Dim soundPlayer As New SoundPlayer(My.Resources.sound_accept())
+                soundPlayer.Play()
+
+                Return
+
+            End If
+            If MySettings.Default.code_detail = "DATA MATRIX" Then
+                If btn_apply.Enabled = False And Not String.IsNullOrEmpty(txt_97.Text) And lb_class.Visible = False Then
+                    Me.Invoke(Sub()
+                                  Label25.Visible = True
+                                  lb_class.Visible = True
+
+
+
+
+                              End Sub)
+                ElseIf btn_apply.Enabled = False And String.IsNullOrEmpty(txt_97.Text) And lb_class.Visible = True Then
+                    Me.Invoke(Sub()
+                                  Label25.Visible = False
+                                  lb_class.Visible = False
+
+
+
+                              End Sub)
+                End If
+
+            Else
+                If btn_apply.Enabled = False And Not String.IsNullOrEmpty(qr_96.Text) And lb_class.Visible = False Then
+                    Me.Invoke(Sub()
+                                  Label25.Visible = True
+                                  lb_class.Visible = True
+
+
+
+                              End Sub)
+                ElseIf btn_apply.Enabled = False And String.IsNullOrEmpty(qr_96.Text) And lb_class.Visible = True Then
+                    Me.Invoke(Sub()
+                                  Label25.Visible = False
+                                  lb_class.Visible = False
+
+                              End Sub)
+                End If
+
+            End If
+            Dim matrix_err As Boolean = True
+            Dim qrcode_err As Boolean = True
+            If MySettings.Default.code_detail = "DATA MATRIX" Then
+
+                Dim codelist As String()
+                codelist = receivedData.Split(ChrW(29))
+                Dim Index As Integer = 0
+                For Each code As String In codelist
+                    Index += 1
+                    Try
+
+
+                        If Index = 1 Then
+                            If Not code.Equals(txt_8010.Text) Then
+                                matrix_err = False
+                                Me.Invoke(Sub()
+                                              txt_8010.BackColor = Color.Red
+                                          End Sub)
+                            End If
+
+                        End If
+                        If Index = 2 Then
+                            If Not code.Length = txt_8011.Text.Length Then
+                                matrix_err = False
+                                Me.Invoke(Sub()
+                                              txt_8011.BackColor = Color.Red
+
+                                              Dim searchText As String = code
+                                              Dim startIndex As Integer = Scan_content.Find(searchText)
+                                              If startIndex <> -1 Then
+
+                                                  Scan_content.Select(startIndex, searchText.Length)
+
+                                                  Scan_content.SelectionColor = Color.Blue
+
+                                              End If
+                                          End Sub)
+                            Else
+                                Me.Invoke(Sub()
+                                              Dim searchText As String = code
+                                              Dim startIndex As Integer = Scan_content.Find(searchText)
+                                              If startIndex <> -1 Then
+
+                                                  Scan_content.Select(startIndex, searchText.Length)
+
+                                                  Scan_content.SelectionColor = Color.Blue
+
+                                              End If
+                                          End Sub)
+                            End If
+
+                        End If
+                        If Index = 3 Then
+                            If Not code.Equals(txt_90.Text) Then
+                                matrix_err = False
+                                Me.Invoke(Sub()
+                                              txt_90.BackColor = Color.Red
+                                          End Sub)
+                            End If
+
+                        End If
+                        If Index = 4 Then
+                            If Not code.Equals(txt_91.Text) Then
+                                matrix_err = False
+                                Me.Invoke(Sub()
+                                              txt_91.BackColor = Color.Red
+                                          End Sub)
+
+                            End If
+
+                        End If
+                        If Index = 5 Then
+                            If Not code.Equals(txt_92.Text) Then
+                                matrix_err = False
+                                Me.Invoke(Sub()
+                                              txt_92.BackColor = Color.Red
+                                          End Sub)
+                            End If
+
+                        End If
+                        If Index = 6 Then
+                            If Not code.Equals(txt_93.Text) Then
+                                matrix_err = False
+                                Me.Invoke(Sub()
+                                              txt_93.BackColor = Color.Red
+                                          End Sub)
+
+                            End If
+                        End If
+                        If Index = 7 Then
+                            If Not code.Equals(txt_94.Text) Then
+                                matrix_err = False
+                                Me.Invoke(Sub()
+                                              txt_94.BackColor = Color.Red
+                                          End Sub)
+                            End If
+
+                        End If
+                        If Index = 8 Then
+                            If Not code.Equals(txt_95.Text) Then
+                                matrix_err = False
+                                Me.Invoke(Sub()
+                                              txt_95.BackColor = Color.Red
+                                          End Sub)
+
+                            End If
                         End If
 
-                    End If
-                    If Index = 2 Then
-                        If Not code.Length = txt_8011.Text.Length Then
-                            matrix_err = False
-                            Me.Invoke(Sub()
-                                          txt_8011.BackColor = Color.Red
-
-                                          Dim searchText As String = code
-                                          Dim startIndex As Integer = Scan_content.Find(searchText)
-                                          If startIndex <> -1 Then
-
-                                              Scan_content.Select(startIndex, searchText.Length)
-
-                                              Scan_content.SelectionColor = Color.Blue
-
-                                          End If
-                                      End Sub)
-                        Else
-                            Me.Invoke(Sub()
-                                          Dim searchText As String = code
-                                          Dim startIndex As Integer = Scan_content.Find(searchText)
-                                          If startIndex <> -1 Then
-
-                                              Scan_content.Select(startIndex, searchText.Length)
-
-                                              Scan_content.SelectionColor = Color.Blue
-
-                                          End If
-                                      End Sub)
+                        If Index = 9 And Not String.IsNullOrEmpty(txt_96.Text) Then
+                            If Not code.Equals(txt_96.Text) Then
+                                matrix_err = False
+                                Me.Invoke(Sub()
+                                              txt_96.BackColor = Color.Red
+                                          End Sub)
+                            End If
                         End If
 
-                    End If
-                    If Index = 3 Then
-                        If Not code.Equals(txt_90.Text) Then
-                            matrix_err = False
-                            Me.Invoke(Sub()
-                                          txt_90.BackColor = Color.Red
-                                      End Sub)
-                        End If
 
-                    End If
-                    If Index = 4 Then
-                        If Not code.Equals(txt_91.Text) Then
-                            matrix_err = False
-                            Me.Invoke(Sub()
-                                          txt_91.BackColor = Color.Red
-                                      End Sub)
+                        If Index = 10 And Not String.IsNullOrEmpty(txt_97.Text) Then
+                            If Not code.Equals(txt_97.Text) Then
+                                matrix_err = False
+                                Me.Invoke(Sub()
+                                              txt_97.BackColor = Color.Red
+                                              lb_class.Font = New Font(lb_class.Font.Name, 150, lb_class.Font.Style)
+                                              lb_class.Text = code.Substring(2)
+                                              lb_class.BackColor = Color.FromArgb(255, 175, 0)
+                                          End Sub)
+                            ElseIf code.Equals(txt_97.Text) Then
+                                Me.Invoke(Sub()
+                                              lb_class.Font = New Font(lb_class.Font.Name, 150, lb_class.Font.Style)
+                                              lb_class.Text = code.Substring(2)
+                                              lb_class.BackColor = Color.FromArgb(255, 211, 182)
+                                          End Sub)
+
+                            End If
 
                         End If
 
-                    End If
-                    If Index = 5 Then
-                        If Not code.Equals(txt_92.Text) Then
-                            matrix_err = False
-                            Me.Invoke(Sub()
-                                          txt_92.BackColor = Color.Red
-                                      End Sub)
-                        End If
 
-                    End If
-                    If Index = 6 Then
-                        If Not code.Equals(txt_93.Text) Then
-                            matrix_err = False
-                            Me.Invoke(Sub()
-                                          txt_93.BackColor = Color.Red
-                                      End Sub)
-
-                        End If
-                    End If
-                    If Index = 7 Then
-                        If Not code.Equals(txt_94.Text) Then
-                            matrix_err = False
-                            Me.Invoke(Sub()
-                                          txt_94.BackColor = Color.Red
-                                      End Sub)
-                        End If
-
-                    End If
-                    If Index = 8 Then
-                        If Not code.Equals(txt_95.Text) Then
-                            matrix_err = False
-                            Me.Invoke(Sub()
-                                          txt_95.BackColor = Color.Red
-                                      End Sub)
-
-                        End If
-                    End If
-
-                    If Index = 9 And Not String.IsNullOrEmpty(txt_96.Text) Then
-                        If Not code.Equals(txt_96.Text) Then
+                        If codelist.Length < 9 And Not String.IsNullOrEmpty(txt_96.Text) Then
                             matrix_err = False
                             Me.Invoke(Sub()
                                           txt_96.BackColor = Color.Red
                                       End Sub)
                         End If
-                    End If
-
-
-                    If Index = 10 And Not String.IsNullOrEmpty(txt_97.Text) Then
-                        If Not code.Equals(txt_97.Text) Then
+                        If codelist.Length < 10 And Not String.IsNullOrEmpty(txt_97.Text) Then
                             matrix_err = False
                             Me.Invoke(Sub()
                                           txt_97.BackColor = Color.Red
-                                          lb_class.Font = New Font(lb_class.Font.Name, 150, lb_class.Font.Style)
-                                          lb_class.Text = code.Substring(2)
+                                          lb_class.Font = New Font(lb_class.Font.Name, 36, lb_class.Font.Style)
+                                          lb_class.Text = "Không có phân cấp dung lượng "
                                           lb_class.BackColor = Color.FromArgb(255, 175, 0)
                                       End Sub)
-                        ElseIf code.Equals(txt_97.Text) Then
-                            Me.Invoke(Sub()
-                                          lb_class.Font = New Font(lb_class.Font.Name, 150, lb_class.Font.Style)
-                                          lb_class.Text = code.Substring(2)
-                                          lb_class.BackColor = Color.FromArgb(255, 211, 182)
-                                      End Sub)
-
                         End If
-
-                    End If
-
-
-                    If codelist.Length < 9 And Not String.IsNullOrEmpty(txt_96.Text) Then
+                    Catch ex As Exception
                         matrix_err = False
-                        Me.Invoke(Sub()
-                                      txt_96.BackColor = Color.Red
-                                  End Sub)
-                    End If
-                    If codelist.Length < 10 And Not String.IsNullOrEmpty(txt_97.Text) Then
-                        matrix_err = False
-                        Me.Invoke(Sub()
-                                      txt_97.BackColor = Color.Red
-                                      lb_class.Font = New Font(lb_class.Font.Name, 36, lb_class.Font.Style)
-                                      lb_class.Text = "Không có phân cấp dung lượng "
-                                      lb_class.BackColor = Color.FromArgb(255, 175, 0)
-                                  End Sub)
-                    End If
-                Catch ex As Exception
-                    matrix_err = False
-                    Exit For
-                End Try
-            Next
-        Else
+                        Exit For
+                    End Try
+                Next
+            Else
 
-            'Next
-            Dim codelist As String()
-            codelist = receivedData.Split(",")
-            Dim Index As Integer = 0
-            For Each code As String In codelist
-                Index += 1
-                Try
+                'Next
+                Dim codelist As String()
+                codelist = receivedData.Split(",")
+                Dim Index As Integer = 0
+                For Each code As String In codelist
+                    Index += 1
+                    Try
 
 
-                    If Index = 1 Then
-                        If Not code.Trim(" ").Equals(qr_90.Text) Then
-                            matrix_err = False
-                            Me.Invoke(Sub()
-                                          qr_90.BackColor = Color.Red
-                                      End Sub)
-                        End If
-
-                    End If
-                    If Index = 2 Then
-                        If Not code.Trim(" ").Equals(qr_91.Text) Then
-                            matrix_err = False
-                            Me.Invoke(Sub()
-                                          qr_91.BackColor = Color.Red
-                                      End Sub)
-                        End If
-
-                    End If
-                    If Index = 3 Then
-                        If Not code.Trim(" ").Equals(qr_92.Text) Then
-                            matrix_err = False
-                            Me.Invoke(Sub()
-                                          qr_92.BackColor = Color.Red
-                                      End Sub)
-                        End If
-
-                    End If
-                    If Index = 4 Then
-                        If Not code.Trim(" ").Equals(qr_93.Text) Then
-                            matrix_err = False
-                            Me.Invoke(Sub()
-                                          qr_93.BackColor = Color.Red
-                                      End Sub)
+                        If Index = 1 Then
+                            If Not code.Trim(" ").Equals(qr_90.Text) Then
+                                matrix_err = False
+                                Me.Invoke(Sub()
+                                              qr_90.BackColor = Color.Red
+                                          End Sub)
+                            End If
 
                         End If
+                        If Index = 2 Then
+                            If Not code.Trim(" ").Equals(qr_91.Text) Then
+                                matrix_err = False
+                                Me.Invoke(Sub()
+                                              qr_91.BackColor = Color.Red
+                                          End Sub)
+                            End If
 
-                    End If
-                    If Index = 5 Then
-                        If Not code.Trim(" ").Equals(qr_94.Text) Then
-                            matrix_err = False
-                            Me.Invoke(Sub()
+                        End If
+                        If Index = 3 Then
+                            If Not code.Trim(" ").Equals(qr_92.Text) Then
+                                matrix_err = False
+                                Me.Invoke(Sub()
+                                              qr_92.BackColor = Color.Red
+                                          End Sub)
+                            End If
 
-                                          qr_94.BackColor = Color.Red
-                                      End Sub)
+                        End If
+                        If Index = 4 Then
+                            If Not code.Trim(" ").Equals(qr_93.Text) Then
+                                matrix_err = False
+                                Me.Invoke(Sub()
+                                              qr_93.BackColor = Color.Red
+                                          End Sub)
+
+                            End If
+
+                        End If
+                        If Index = 5 Then
+                            If Not code.Trim(" ").Equals(qr_94.Text) Then
+                                matrix_err = False
+                                Me.Invoke(Sub()
+
+                                              qr_94.BackColor = Color.Red
+                                          End Sub)
+                            End If
+
+                        End If
+                        If Index = 6 Then
+                            If Not code.Trim(" ").Length = qr_95.Text.Length Then
+                                matrix_err = False
+                                Me.Invoke(Sub()
+
+                                              qr_95.BackColor = Color.Red
+                                          End Sub)
+                            End If
                         End If
 
-                    End If
-                    If Index = 6 Then
-                        If Not code.Trim(" ").Length = qr_95.Text.Length Then
-                            matrix_err = False
-                            Me.Invoke(Sub()
+                        If Index = 7 And Not String.IsNullOrEmpty(qr_96.Text) Then
+                            If Not code.Trim(" ").Equals(qr_96.Text) Then
+                                matrix_err = False
+                                Me.Invoke(Sub()
 
-                                          qr_95.BackColor = Color.Red
-                                      End Sub)
+                                              qr_96.BackColor = Color.Red
+                                              lb_class.Font = New Font(lb_class.Font.Name, 150, lb_class.Font.Style)
+                                              lb_class.Text = code.Trim(" ")
+                                              lb_class.BackColor = Color.FromArgb(255, 175, 0)
+                                          End Sub)
+                            ElseIf code.Trim(" ").Equals(qr_96.Text) Then
+                                Me.Invoke(Sub()
+                                              lb_class.Font = New Font(lb_class.Font.Name, 150, lb_class.Font.Style)
+                                              lb_class.Text = code.Trim(" ")
+                                              lb_class.BackColor = Color.FromArgb(255, 211, 182)
+                                          End Sub)
+
+                            End If
+
                         End If
-                    End If
-
-                    If Index = 7 And Not String.IsNullOrEmpty(qr_96.Text) Then
-                        If Not code.Trim(" ").Equals(qr_96.Text) Then
+                        If codelist.Length = 6 And Not String.IsNullOrEmpty(qr_96.Text) Then
                             matrix_err = False
                             Me.Invoke(Sub()
 
                                           qr_96.BackColor = Color.Red
-                                          lb_class.Font = New Font(lb_class.Font.Name, 150, lb_class.Font.Style)
-                                          lb_class.Text = code.Trim(" ")
+                                          lb_class.Font = New Font(lb_class.Font.Name, 36, lb_class.Font.Style)
+                                          lb_class.Text = "Không có phân cấp dung lượng "
                                           lb_class.BackColor = Color.FromArgb(255, 175, 0)
                                       End Sub)
-                        ElseIf code.Trim(" ").Equals(qr_96.Text) Then
-                            Me.Invoke(Sub()
-                                          lb_class.Font = New Font(lb_class.Font.Name, 150, lb_class.Font.Style)
-                                          lb_class.Text = code.Trim(" ")
-                                          lb_class.BackColor = Color.FromArgb(255, 211, 182)
-                                      End Sub)
-
                         End If
-
-                    End If
-                    If codelist.Length = 6 And Not String.IsNullOrEmpty(qr_96.Text) Then
+                    Catch ex As Exception
                         matrix_err = False
-                        Me.Invoke(Sub()
+                        Exit For
+                    End Try
+                Next
 
-                                      qr_96.BackColor = Color.Red
-                                      lb_class.Font = New Font(lb_class.Font.Name, 36, lb_class.Font.Style)
-                                      lb_class.Text = "Không có phân cấp dung lượng "
-                                      lb_class.BackColor = Color.FromArgb(255, 175, 0)
-                                  End Sub)
-                    End If
-                Catch ex As Exception
-                    matrix_err = False
-                    Exit For
-                End Try
-            Next
+            End If
+            If Not matrix_err Then
+                open_Light("Red")
+                Me.BeginInvoke(New UpdateControlDelegate(AddressOf _mUpdateControl), New Object() {lb_msg, "Mã code không đúng."})
+                Me.BeginInvoke(New UpdateControlColorDelegate(AddressOf _mUpdateControlColor), New Object() {lb_msg, Color.Red})
+                Dim soundPlayer As New SoundPlayer(My.Resources.sound())
+                If Not bg_work.IsBusy Then
+                    Dim args As Tuple(Of String, String) = New Tuple(Of String, String)(receivedData_2, "E")
+                    bg_work.RunWorkerAsync(args)
+                End If
+                soundPlayer.Play()
+                Return
+            End If
+            If Not qrcode_err Then
+                open_Light("Red")
+                Me.BeginInvoke(New UpdateControlColorDelegate(AddressOf _mUpdateControlColor), New Object() {lb_msg, Color.Red})
+                Me.BeginInvoke(New UpdateControlDelegate(AddressOf _mUpdateControl), New Object() {lb_msg, "Mã code không đúng."})
+                Dim soundPlayer As New SoundPlayer(My.Resources.sound())
+                If Not bg_work.IsBusy Then
+                    Dim args As Tuple(Of String, String) = New Tuple(Of String, String)(receivedData_2, "E")
+                    bg_work.RunWorkerAsync(args)
+                End If
+                soundPlayer.Play()
+                Return
 
-        End If
-        If Not matrix_err Then
-            open_Light("Red")
-            Me.BeginInvoke(New UpdateControlDelegate(AddressOf _mUpdateControl), New Object() {lb_msg, "Mã code không đúng."})
-            Me.BeginInvoke(New UpdateControlColorDelegate(AddressOf _mUpdateControlColor), New Object() {lb_msg, Color.Red})
-            Dim soundPlayer As New SoundPlayer(My.Resources.sound())
+            End If
             If Not bg_work.IsBusy Then
-                Dim args As Tuple(Of String, String) = New Tuple(Of String, String)(receivedData_2, "E")
+
+                Dim args As Tuple(Of String, String) = New Tuple(Of String, String)(receivedData_2, "N")
                 bg_work.RunWorkerAsync(args)
             End If
-            soundPlayer.Play()
-            Return
-        End If
-        If Not qrcode_err Then
-            open_Light("Red")
-            Me.BeginInvoke(New UpdateControlColorDelegate(AddressOf _mUpdateControlColor), New Object() {lb_msg, Color.Red})
-            Me.BeginInvoke(New UpdateControlDelegate(AddressOf _mUpdateControl), New Object() {lb_msg, "Mã code không đúng."})
-            Dim soundPlayer As New SoundPlayer(My.Resources.sound())
-            If Not bg_work.IsBusy Then
-                Dim args As Tuple(Of String, String) = New Tuple(Of String, String)(receivedData_2, "E")
-                bg_work.RunWorkerAsync(args)
-            End If
-            soundPlayer.Play()
-            Return
-
-        End If
-        If Not bg_work.IsBusy Then
-
-            Dim args As Tuple(Of String, String) = New Tuple(Of String, String)(receivedData_2, "N")
-            bg_work.RunWorkerAsync(args)
         End If
         'bg_work.RunWorkerAsync(receivedData_2)
 
@@ -1626,7 +1751,7 @@ Public Class qrcode_set
         Dim data As String = args.Item1
         Dim type As String = args.Item2
         Dim _class As String = ""
-        Dim rowData As Object() = {Date.Now.ToString("yyyy/MM/dd HH:mm:ss"), data} ' Dữ liệu của dòng cần thêm
+        Dim rowData As Object() = {Date.Now.ToString("yyyy/MM/dd HH:mm:ss"), data, currentMacode} ' Dữ liệu của dòng cần thêm
         Dim parsedValue As Integer
         Integer.TryParse(lb_count_limit.Text, parsedValue)
 
@@ -1659,7 +1784,7 @@ Public Class qrcode_set
                     Me.BeginInvoke(New UpdateControlColorDelegate(AddressOf _mUpdateControlColor), New Object() {lb_msg, Color.Red})
                     Return
                 End If
-                If insert_data(data, Date.Now.ToString("yyyy/MM/dd HH:mm:ss"), type) = "True" And db.insert(data, Date.Now.ToString("yyyy/MM/dd HH:mm:ss"), 1, 1, _class, type) = "True" Then
+                If insert_data(data, Date.Now.ToString("yyyy/MM/dd HH:mm:ss"), type, currentMacode) = "True" And db.insert(data, Date.Now.ToString("yyyy/MM/dd HH:mm:ss"), 1, 1, _class, type, currentMacode) = "True" Then
 
                     AddDataToDataGridView(rowData)
                     open_Light("Green")
@@ -1667,7 +1792,7 @@ Public Class qrcode_set
                     Me.BeginInvoke(New UpdateControlColorDelegate(AddressOf _mUpdateControlColor), New Object() {lb_msg, Color.Lime})
 
                 Else
-                    If insert_data(data, Date.Now.ToString("yyyy/MM/dd HH:mm:ss"), type) = "False" And db.insert(data, Date.Now.ToString("yyyy/MM/dd HH:mm:ss"), 1, 1, _class, type) = "False" Then
+                    If insert_data(data, Date.Now.ToString("yyyy/MM/dd HH:mm:ss"), type, currentMacode) = "False" And db.insert(data, Date.Now.ToString("yyyy/MM/dd HH:mm:ss"), 1, 1, _class, type, currentMacode) = "False" Then
                         open_Light("Red")
                         Me.BeginInvoke(New UpdateControlDelegate(AddressOf _mUpdateControl), New Object() {lb_msg, "ERROR insert"})
                         Me.BeginInvoke(New UpdateControlColorDelegate(AddressOf _mUpdateControlColor), New Object() {lb_msg, Color.Red})
@@ -1681,7 +1806,7 @@ Public Class qrcode_set
                     End If
                 End If
             ElseIf pingreply.Status <> IPStatus.Success Then
-                If db.insert(data, Date.Now.ToString("yyyy/MM/dd HH:mm:ss"), 0, 0, _class, type) = "True" Then
+                If db.insert(data, Date.Now.ToString("yyyy/MM/dd HH:mm:ss"), 0, 0, _class, type, currentMacode) = "True" Then
                     AddDataToDataGridView(rowData)
                     open_Light("Green")
 
@@ -1689,7 +1814,7 @@ Public Class qrcode_set
                     Me.BeginInvoke(New UpdateControlColorDelegate(AddressOf _mUpdateControlColor), New Object() {lb_msg, Color.Lime})
                     _offlinecount()
                 Else
-                    If db.insert(data, Date.Now.ToString("yyyy/MM/dd HH:mm:ss"), 0, 0, _class, type) = "False" Then
+                    If db.insert(data, Date.Now.ToString("yyyy/MM/dd HH:mm:ss"), 0, 0, _class, type, currentMacode) = "False" Then
                         open_Light("Red")
                         Me.BeginInvoke(New UpdateControlDelegate(AddressOf _mUpdateControl), New Object() {lb_msg, "ERROR insert"})
                         Me.BeginInvoke(New UpdateControlColorDelegate(AddressOf _mUpdateControlColor), New Object() {lb_msg, Color.Red})
@@ -1709,7 +1834,7 @@ Public Class qrcode_set
 
         Catch ex As Exception
 
-            If db.insert(data, Date.Now.ToString("yyyy/MM/dd HH:mm:ss"), 0, 0, _class, type) = "True" Then
+            If db.insert(data, Date.Now.ToString("yyyy/MM/dd HH:mm:ss"), 0, 0, _class, type, currentMacode) = "True" Then
 
                 AddDataToDataGridView(rowData)
                 open_Light("Green")
@@ -1717,7 +1842,7 @@ Public Class qrcode_set
                 Me.BeginInvoke(New UpdateControlColorDelegate(AddressOf _mUpdateControlColor), New Object() {lb_msg, Color.Lime})
                 _offlinecount()
             Else
-                If db.insert(data, Date.Now.ToString("yyyy/MM/dd HH:mm:ss"), _class, 0, 0, type) = "False" Then
+                If db.insert(data, Date.Now.ToString("yyyy/MM/dd HH:mm:ss"), _class, 0, 0, type, currentMacode) = "False" Then
                     open_Light("Red")
                     Me.BeginInvoke(New UpdateControlDelegate(AddressOf _mUpdateControl), New Object() {lb_msg, "ERROR insert"})
                     Me.BeginInvoke(New UpdateControlColorDelegate(AddressOf _mUpdateControlColor), New Object() {lb_msg, Color.Red})
@@ -1742,7 +1867,7 @@ Public Class qrcode_set
 
         Me.BeginInvoke(New UpdateControlDelegate(AddressOf _mUpdateControl), New Object() {lb_count, dgv_data.Rows.Count().ToString()})
         Sort_DGV()
-
+        currentMacode = Nothing
     End Sub
     Private Sub AddDataToDataGridView(data As Object())
         Dim connectionString As String = "Data Source=LELONG.db;Version=3;"
@@ -1838,7 +1963,7 @@ Public Class qrcode_set
 
         PictureBox2.Image = datacode
     End Sub
-    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer_checksocket.Tick
         '_offlinecount()
     End Sub
 
@@ -1853,6 +1978,7 @@ Public Class qrcode_set
         If serialPort2 IsNot Nothing AndAlso serialPort2.IsOpen Then
             serialPort2.Close()
         End If
+        server.StopServer()
         m_reader.ExecCommand("ALLOFF")
         OnlineStatus_Timer.Dispose()
         OnlineStatus_Timer.Stop()
@@ -2467,7 +2593,7 @@ Public Class qrcode_set
         End Try
 
     End Sub
-    Public Function insert_data(data As String, time As String, type As String)
+    Public Function insert_data(data As String, time As String, type As String, qrcode010 As String)
 
 
         Using connprod As New OracleConnection(ora_connectstring)
@@ -2478,7 +2604,7 @@ Public Class qrcode_set
             If Not String.IsNullOrEmpty(txt_id_matrix.Text) Then
 
                 Try
-                    Dim InsertSql As String = " INSERT INTO  tc_mtm_file VALUES( '" & data & "',to_date('" & time & "','YYYY/MM/DD HH24:MI:SS') ,'" & txt_id_matrix.Text & "','" & type & "','" & local & "')"
+                    Dim InsertSql As String = " INSERT INTO  tc_mtm_file VALUES( '" & data & "',to_date('" & time & "','YYYY/MM/DD HH24:MI:SS') ,'" & txt_id_matrix.Text & "','" & type & "','" & local & "','" & qrcode010 & "')"
                     Dim dr_insert As OracleCommand = New OracleCommand(InsertSql, connprod)
                     Dim dt_insert As OracleDataReader = dr_insert.ExecuteReader
                 Catch ex As OracleException
@@ -2502,7 +2628,7 @@ Public Class qrcode_set
 
             Else
                 Try
-                    Dim InsertSql As String = " INSERT INTO  tc_mtm_file VALUES( '" & data & "',to_date('" & time & "','YYYY/MM/DD HH24:MI:SS') ,'" & txt_id_qr.Text & "','" & type & "','" & local & "')"
+                    Dim InsertSql As String = " INSERT INTO  tc_mtm_file VALUES( '" & data & "',to_date('" & time & "','YYYY/MM/DD HH24:MI:SS') ,'" & txt_id_qr.Text & "','" & type & "','" & local & "','" & qrcode010 & "')"
                     Dim dr_insert As OracleCommand = New OracleCommand(InsertSql, connprod)
                     Dim dt_insert As OracleDataReader = dr_insert.ExecuteReader
                 Catch ex As OracleException
@@ -2556,5 +2682,56 @@ Public Class qrcode_set
         End If
     End Sub
 
+    Private Sub Socket_QR010(data As String)
+        If isProcessing Then
+            ' Đang chờ mã laser → không nhận mã mới
+            Return
+        End If
 
+        currentMacode = data
+        Invoke(Sub()
+                   Scan_content2.Text = data
+
+
+
+               End Sub)
+    End Sub
+    'Private Sub server_ClientDisconnected(ip As String) Handles server.ClientDisconnected
+    '    Invoke(Sub()
+    '               MessageBox.Show("Client đã ngắt kết nối: " & ip, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+    '           End Sub)
+    'End Sub
+
+    Private Sub btn_compensatory_scan_Click(sender As Object, e As EventArgs) Handles btn_compensatory_scan.Click
+        If serialPort IsNot Nothing AndAlso serialPort.IsOpen Then
+            RemoveHandler serialPort.DataReceived, AddressOf SerialPort_DataReceived
+            serialPort.Close()
+        End If
+
+
+        Dim frm As New qrcode_compensatory_scan(serialPort)
+        frm.ShowDialog()
+
+        'Repert connect seriaPort
+        If Not serialPort.IsOpen Then
+
+            serialPort.Open()
+        End If
+        AddHandler serialPort.DataReceived, AddressOf SerialPort_DataReceived
+        _calamviec()
+    End Sub
+    Private Sub UpdateClientCount(count As Integer)
+        If Me.InvokeRequired Then
+            Me.Invoke(Sub() UpdateClientCount(count))
+        Else
+
+            If count = 0 Then
+                Me.BeginInvoke(New UpdateControlDelegate(AddressOf _mUpdateControl), New Object() {Me.stat_socket, "KHÔNG CÓ KẾT NỐI SOCKET "})
+                Me.BeginInvoke(New UpdateControlColorDelegate(AddressOf _mUpdateControlColor), New Object() {Me.stat_socket, Color.DarkRed})
+            Else
+                Me.BeginInvoke(New UpdateControlDelegate(AddressOf _mUpdateControl), New Object() {Me.stat_socket, "SỐ LƯỢNG CLIEN KẾT NỐI : " & count & " "})
+                Me.BeginInvoke(New UpdateControlColorDelegate(AddressOf _mUpdateControlColor), New Object() {Me.stat_socket, Color.Lime})
+            End If
+        End If
+    End Sub
 End Class

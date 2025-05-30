@@ -42,6 +42,11 @@ QR014_CODECHECKING
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
 </member>
+<member name="P:QR014_CODECHECKING.My.Resources.Resources.return__1_">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
 <member name="P:QR014_CODECHECKING.My.Resources.Resources.return1">
 <summary>
   Looks up a localized resource of type System.Drawing.Bitmap.

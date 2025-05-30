@@ -39,7 +39,7 @@ Public Class qrcode_manage
             Using conn As New SQLiteConnection(connectionString)
                 conn.Open()
                 Dim command = conn.CreateCommand()
-                Dim sql As String = "SELECT macode,thoigian FROM laser_table WHERE thoigian>='" & bdate & "' AND thoigian<='" & edate & "'  "
+                Dim sql As String = "SELECT macode,thoigian,qrcode_010 FROM laser_table WHERE thoigian>='" & bdate & "' AND thoigian<='" & edate & "'  "
 
                 If cb_type.SelectedValue.ToString() = "1" Then
                     sql = sql + " AND loai = 'N' ;"
@@ -53,7 +53,8 @@ Public Class qrcode_manage
                     While reader.Read()
                         Dim macode As String = reader.GetString(0)
                         Dim thoigian As String = reader.GetString(1)
-                        Dim rowData As Object() = {macode, thoigian}
+                        Dim qr_code010 As String = reader.GetString(2)
+                        Dim rowData As Object() = {macode, thoigian, qr_code010}
                         AddDataToDataGridView(rowData)
                     End While
                 End Using

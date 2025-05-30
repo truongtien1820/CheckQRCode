@@ -130,13 +130,16 @@
   <data name="logo_lelong" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\logo_lelong.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="return1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\return1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="sound_accept" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\sound_accept.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Dou" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Dou.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="return1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\return1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="return (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\return (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

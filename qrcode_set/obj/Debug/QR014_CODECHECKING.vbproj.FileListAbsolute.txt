@@ -167,6 +167,9 @@ C:\Users\it_09\Desktop\Tien\2024\QR014\qrcode_set\obj\Debug\QR014_CODECHECKING.q
 C:\Users\it_09\Desktop\Tien\2024\QR014\qrcode_set\obj\Debug\QR014_CODECHECKING.qrcode_productreturn.resources
 C:\Users\it_09\Desktop\Tien\2024\QR014\qrcode_set\obj\Debug\QR014_CODECHECKING.vbproj.GenerateResource.cache
 C:\Users\it_09\Desktop\Tien\2024\QR014\qrcode_set\obj\Debug\QR014_CODECHECKING.vbproj.CoreCompileInputs.cache
+C:\Users\it_09\Desktop\Tien\2024\QR014\qrcode_set\obj\Debug\QR014_CODECHECKING.exe
+C:\Users\it_09\Desktop\Tien\2024\QR014\qrcode_set\obj\Debug\QR014_CODECHECKING.xml
+C:\Users\it_09\Desktop\Tien\2024\QR014\qrcode_set\obj\Debug\QR014_CODECHECKING.pdb
 C:\Users\it_09\Desktop\Tien\2024\QR014\qrcode_set\bin\Debug\sqldb.vb
 C:\Users\it_09\Desktop\Tien\2024\QR014\qrcode_set\bin\Debug\QR014_CODECHECKING.exe.config
 C:\Users\it_09\Desktop\Tien\2024\QR014\qrcode_set\bin\Debug\QR014_CODECHECKING.exe.manifest
@@ -188,6 +191,4 @@ C:\Users\it_09\Desktop\Tien\2024\QR014\qrcode_set\bin\Debug\zxing.presentation.p
 C:\Users\it_09\Desktop\Tien\2024\QR014\qrcode_set\obj\Debug\QR014_CODECHECKING.exe.manifest
 C:\Users\it_09\Desktop\Tien\2024\QR014\qrcode_set\obj\Debug\QR014_CODECHECKING.application
 C:\Users\it_09\Desktop\Tien\2024\QR014\qrcode_set\obj\Debug\QR014_CODECHECKING.vbproj.CopyComplete
-C:\Users\it_09\Desktop\Tien\2024\QR014\qrcode_set\obj\Debug\QR014_CODECHECKING.exe
-C:\Users\it_09\Desktop\Tien\2024\QR014\qrcode_set\obj\Debug\QR014_CODECHECKING.xml
-C:\Users\it_09\Desktop\Tien\2024\QR014\qrcode_set\obj\Debug\QR014_CODECHECKING.pdb
+C:\Users\it_09\Desktop\Tien\2024\QR014\qrcode_set\obj\Debug\QR014_CODECHECKING.qrcode_compensatory_scan.resources

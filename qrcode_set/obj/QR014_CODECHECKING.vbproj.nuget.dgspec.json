@@ -38,6 +38,10 @@
       "frameworks": {
         "net452": {
           "dependencies": {
+            "EntityFramework": {
+              "target": "Package",
+              "version": "[6.4.4, )"
+            },
             "Oracle.ManagedDataAccess": {
               "target": "Package",
               "version": "[19.18.0, )"
@@ -54,6 +58,10 @@
               "target": "Package",
               "version": "[1.0.103, )"
             },
+            "Stub.System.Data.SQLite.Core.NetFramework": {
+              "target": "Package",
+              "version": "[1.0.118, )"
+            },
             "System.Data.SQLite": {
               "target": "Package",
               "version": "[1.0.117, )"
@@ -61,6 +69,14 @@
             "System.Data.SQLite.Core": {
               "target": "Package",
               "version": "[1.0.118, )"
+            },
+            "System.Data.SQLite.EF6": {
+              "target": "Package",
+              "version": "[1.0.117, )"
+            },
+            "System.Data.SQLite.Linq": {
+              "target": "Package",
+              "version": "[1.0.117, )"
             },
             "System.Net.Primitives": {
               "target": "Package",

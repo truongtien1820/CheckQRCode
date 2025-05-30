@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class qrcode_setting
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class qrcode_setting
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(qrcode_setting))
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
@@ -45,11 +45,17 @@ Partial Class qrcode_setting
         Me.time_light = New System.Windows.Forms.ComboBox()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.delay_time = New System.Windows.Forms.ComboBox()
+        Me.GroupBox6 = New System.Windows.Forms.GroupBox()
+        Me.chb_connect = New System.Windows.Forms.CheckBox()
+        Me.GroupBox7 = New System.Windows.Forms.GroupBox()
+        Me.txt_ipqr010 = New System.Windows.Forms.TextBox()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
+        Me.GroupBox6.SuspendLayout()
+        Me.GroupBox7.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox2
@@ -80,7 +86,7 @@ Partial Class qrcode_setting
         Me.Button1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Button1.BackColor = System.Drawing.SystemColors.AppWorkspace
         Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.Location = New System.Drawing.Point(247, 457)
+        Me.Button1.Location = New System.Drawing.Point(247, 540)
         Me.Button1.Margin = New System.Windows.Forms.Padding(2)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(127, 34)
@@ -102,7 +108,7 @@ Partial Class qrcode_setting
         Me.GroupBox3.Controls.Add(Me.e_h1)
         Me.GroupBox3.Controls.Add(Me.Label2)
         Me.GroupBox3.Controls.Add(Me.Label1)
-        Me.GroupBox3.Location = New System.Drawing.Point(23, 352)
+        Me.GroupBox3.Location = New System.Drawing.Point(23, 426)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(336, 100)
         Me.GroupBox3.TabIndex = 5
@@ -245,7 +251,7 @@ Partial Class qrcode_setting
         'GroupBox1
         '
         Me.GroupBox1.Controls.Add(Me.time_light)
-        Me.GroupBox1.Location = New System.Drawing.Point(23, 152)
+        Me.GroupBox1.Location = New System.Drawing.Point(23, 198)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(336, 59)
         Me.GroupBox1.TabIndex = 9
@@ -266,7 +272,7 @@ Partial Class qrcode_setting
         'GroupBox5
         '
         Me.GroupBox5.Controls.Add(Me.delay_time)
-        Me.GroupBox5.Location = New System.Drawing.Point(23, 234)
+        Me.GroupBox5.Location = New System.Drawing.Point(23, 263)
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.Size = New System.Drawing.Size(336, 59)
         Me.GroupBox5.TabIndex = 10
@@ -284,12 +290,51 @@ Partial Class qrcode_setting
         Me.delay_time.Size = New System.Drawing.Size(193, 21)
         Me.delay_time.TabIndex = 1
         '
+        'GroupBox6
+        '
+        Me.GroupBox6.Controls.Add(Me.chb_connect)
+        Me.GroupBox6.Location = New System.Drawing.Point(23, 340)
+        Me.GroupBox6.Name = "GroupBox6"
+        Me.GroupBox6.Size = New System.Drawing.Size(336, 59)
+        Me.GroupBox6.TabIndex = 11
+        Me.GroupBox6.TabStop = False
+        Me.GroupBox6.Text = "Connect QR010"
+        '
+        'chb_connect
+        '
+        Me.chb_connect.AutoSize = True
+        Me.chb_connect.Location = New System.Drawing.Point(17, 26)
+        Me.chb_connect.Name = "chb_connect"
+        Me.chb_connect.Size = New System.Drawing.Size(80, 17)
+        Me.chb_connect.TabIndex = 0
+        Me.chb_connect.Text = "Connection"
+        Me.chb_connect.UseVisualStyleBackColor = True
+        '
+        'GroupBox7
+        '
+        Me.GroupBox7.Controls.Add(Me.txt_ipqr010)
+        Me.GroupBox7.Location = New System.Drawing.Point(23, 131)
+        Me.GroupBox7.Name = "GroupBox7"
+        Me.GroupBox7.Size = New System.Drawing.Size(336, 59)
+        Me.GroupBox7.TabIndex = 12
+        Me.GroupBox7.TabStop = False
+        Me.GroupBox7.Text = "Scanner IP010"
+        '
+        'txt_ipqr010
+        '
+        Me.txt_ipqr010.Location = New System.Drawing.Point(14, 19)
+        Me.txt_ipqr010.Name = "txt_ipqr010"
+        Me.txt_ipqr010.Size = New System.Drawing.Size(193, 20)
+        Me.txt_ipqr010.TabIndex = 7
+        '
         'qrcode_setting
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.AppWorkspace
-        Me.ClientSize = New System.Drawing.Size(384, 497)
+        Me.ClientSize = New System.Drawing.Size(384, 580)
+        Me.Controls.Add(Me.GroupBox7)
+        Me.Controls.Add(Me.GroupBox6)
         Me.Controls.Add(Me.GroupBox5)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.GroupBox4)
@@ -310,6 +355,10 @@ Partial Class qrcode_setting
         Me.GroupBox4.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox5.ResumeLayout(False)
+        Me.GroupBox6.ResumeLayout(False)
+        Me.GroupBox6.PerformLayout()
+        Me.GroupBox7.ResumeLayout(False)
+        Me.GroupBox7.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -335,4 +384,8 @@ Partial Class qrcode_setting
     Friend WithEvents time_light As ComboBox
     Friend WithEvents GroupBox5 As GroupBox
     Friend WithEvents delay_time As ComboBox
+    Friend WithEvents GroupBox6 As GroupBox
+    Friend WithEvents chb_connect As CheckBox
+    Friend WithEvents GroupBox7 As GroupBox
+    Friend WithEvents txt_ipqr010 As TextBox
 End Class

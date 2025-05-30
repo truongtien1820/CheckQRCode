@@ -21,10 +21,10 @@ Namespace My
         Inherits Global.System.Configuration.ApplicationSettingsBase
         
         Private Shared defaultInstance As MySettings = CType(Global.System.Configuration.ApplicationSettingsBase.Synchronized(New MySettings()),MySettings)
-        
+
 #Region "My.Settings Auto-Save Functionality"
 #If _MyType = "WindowsForms" Then
-    Private Shared addedHandler As Boolean
+        Private Shared addedHandler As Boolean
 
     Private Shared addedHandlerLockObject As New Object
 
@@ -65,7 +65,17 @@ Namespace My
                 Me("txt_IP") = value
             End Set
         End Property
-
+        <Global.System.Configuration.UserScopedSettingAttribute(),
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.Configuration.DefaultSettingValueAttribute("")>
+        Public Property IPQR010() As String
+            Get
+                Return CType(Me("IPQR010"), String)
+            End Get
+            Set
+                Me("IPQR010") = Value
+            End Set
+        End Property
 
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -582,6 +592,17 @@ Global.System.Configuration.DefaultSettingValueAttribute("")>
             End Get
             Set
                 Me("limit") = Value
+            End Set
+        End Property
+        <Global.System.Configuration.UserScopedSettingAttribute(),
+        Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+        Global.System.Configuration.DefaultSettingValueAttribute("")>
+        Public Property connect() As String
+            Get
+                Return CType(Me("connect"), String)
+            End Get
+            Set
+                Me("connect") = Value
             End Set
         End Property
     End Class

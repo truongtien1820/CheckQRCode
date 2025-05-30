@@ -45,15 +45,15 @@ Public Class sqldb
         End Try
 
     End Function
-    Public Function insert(_data As String, _time As String, _status As Integer, _convert As Integer, _class As String, _type As String)
+    Public Function insert(_data As String, _time As String, _status As Integer, _convert As Integer, _class As String, _type As String, _qrcode010 As String)
         Try
             Using conn As New SQLiteConnection(connectionString)
                 conn.Open()
 
 
-                Dim insertDataSql As String = "INSERT INTO laser_table(macode,thoigian,phanloai,trangthai,chuyendoi,loai) VALUES ('" & _data & "','" & _time & "','" & _class & "'," & _status & "," & _convert & ",'" & _type & "');"
-                    Dim insertDataCommand As New SQLiteCommand(insertDataSql, conn)
-                    insertDataCommand.ExecuteNonQuery()
+                Dim insertDataSql As String = "INSERT INTO laser_table(macode,thoigian,phanloai,trangthai,chuyendoi,loai,qrcode_010) VALUES ('" & _data & "','" & _time & "','" & _class & "'," & _status & "," & _convert & ",'" & _type & "','" & _qrcode010 & "');"
+                Dim insertDataCommand As New SQLiteCommand(insertDataSql, conn)
+                insertDataCommand.ExecuteNonQuery()
 
 
 
@@ -159,6 +159,88 @@ Public Class sqldb
             Return "False"
         End Try
 
+    End Function
+    Public Sub alter_table_add_qrcode()
+        Try
+            Using conn As New SQLiteConnection(connectionString)
+                conn.Open()
+
+                ' Kiểm tra danh sách cột của bảng laser_table
+                Dim checkColumnSql As String = "PRAGMA table_info(laser_table);"
+                Dim checkColumnCmd As New SQLiteCommand(checkColumnSql, conn)
+
+                Dim columnExists As Boolean = False
+
+                Using reader As SQLiteDataReader = checkColumnCmd.ExecuteReader()
+                    While reader.Read()
+                        Dim columnName As String = reader("name").ToString().ToLower()
+                        If columnName = "qrcode_010" Then
+                            columnExists = True
+                            Exit While
+                        End If
+                    End While
+                End Using
+
+                ' Nếu cột chưa tồn tại thì thêm vào
+                If Not columnExists Then
+                    Dim alterSql As String = "ALTER TABLE laser_table ADD COLUMN qrcode_010 TEXT;"
+                    Dim alterCmd As New SQLiteCommand(alterSql, conn)
+                    alterCmd.ExecuteNonQuery()
+
+
+                Else
+
+                End If
+
+            End Using
+        Catch ex As Exception
+            MessageBox.Show("Lỗi khi ALTER TABLE: " & ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+    Public Function CheckDuplicateQRCode(qrcode As String) As Integer
+        Try
+            Using conn As New SQLiteConnection(connectionString)
+                conn.Open()
+
+                Dim sql As String = "SELECT COUNT(*) FROM laser_table WHERE qrcode_010 = @qrcode AND loai = 'N'"
+                Using cmd As New SQLiteCommand(sql, conn)
+                    cmd.Parameters.AddWithValue("@qrcode", qrcode)
+
+                    Dim count As Integer = Convert.ToInt32(cmd.ExecuteScalar())
+                    If count > 0 Then
+                        Return 1 ' Có trùng
+                    Else
+                        Return 0 ' Không trùng
+                    End If
+                End Using
+            End Using
+        Catch ex As Exception
+            MessageBox.Show("Lỗi khi kiểm tra trùng mã QR: " & ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return -1 ' Lỗi
+        End Try
+    End Function
+    Public Function CheckDuplicateQRCode014(macode As String) As Integer
+        Try
+            Using conn As New SQLiteConnection(connectionString)
+                conn.Open()
+
+                Dim sql As String = "SELECT COUNT(*) FROM laser_table WHERE macode = @macode AND loai NOT IN  ('X', 'Z')"
+                Using cmd As New SQLiteCommand(sql, conn)
+                    cmd.Parameters.AddWithValue("@macode", macode)
+
+                    Dim count As Integer = Convert.ToInt32(cmd.ExecuteScalar())
+                    If count > 0 Then
+                        Return 1 ' Có trùng
+                    Else
+                        Return 0 ' Không trùng
+                    End If
+                End Using
+            End Using
+        Catch ex As Exception
+            MessageBox.Show("Lỗi khi kiểm tra trùng mã QR: " & ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return -1 ' Lỗi
+        End Try
     End Function
 
 End Class

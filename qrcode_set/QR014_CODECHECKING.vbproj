@@ -29,8 +29,8 @@
     <ProductName>QR014-Quét kiểm tra code</ProductName>
     <PublisherName>QR014-Quét kiểm tra code</PublisherName>
     <SuiteName>QR014-Quét kiểm tra code</SuiteName>
-    <MinimumRequiredVersion>1.0.0.53</MinimumRequiredVersion>
-    <ApplicationRevision>54</ApplicationRevision>
+    <MinimumRequiredVersion>1.0.0.58</MinimumRequiredVersion>
+    <ApplicationRevision>59</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -77,11 +77,10 @@
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>257686DE51B97E590F551EEB04CB25BAAEFDD884</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>C71D1F12D82AFFA3228F16595745C108E2B3F557</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>
-    </ManifestKeyFile>
+    <ManifestKeyFile>QR014_CODECHECKING_1_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -154,6 +153,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="qrcode_compensatory_scan.Designer.vb">
+      <DependentUpon>qrcode_compensatory_scan.vb</DependentUpon>
+    </Compile>
+    <Compile Include="qrcode_compensatory_scan.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="qrcode_set_limit.Designer.vb">
       <DependentUpon>qrcode_set_limit.vb</DependentUpon>
     </Compile>
@@ -204,11 +209,15 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Settings.vb" />
+    <Compile Include="SocketServer.vb" />
     <Compile Include="sqldb.vb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="qrcode_compensatory_scan.resx">
+      <DependentUpon>qrcode_compensatory_scan.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="qrcode_manage.resx">
       <DependentUpon>qrcode_manage.vb</DependentUpon>
     </EmbeddedResource>
@@ -248,10 +257,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="QR014_CODECHECKING_1_TemporaryKey.pfx" />
     <None Include="QR014_CODECHECKING_TemporaryKey.pfx" />
     <None Include="Resources\logo_lelong.png" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="EntityFramework">
+      <Version>6.4.4</Version>
+    </PackageReference>
     <PackageReference Include="Oracle.ManagedDataAccess">
       <Version>19.18.0</Version>
     </PackageReference>
@@ -264,11 +277,20 @@
     <PackageReference Include="SQLite.Interop.dll">
       <Version>1.0.103</Version>
     </PackageReference>
+    <PackageReference Include="Stub.System.Data.SQLite.Core.NetFramework">
+      <Version>1.0.118</Version>
+    </PackageReference>
     <PackageReference Include="System.Data.SQLite">
       <Version>1.0.117</Version>
     </PackageReference>
     <PackageReference Include="System.Data.SQLite.Core">
       <Version>1.0.118</Version>
+    </PackageReference>
+    <PackageReference Include="System.Data.SQLite.EF6">
+      <Version>1.0.117</Version>
+    </PackageReference>
+    <PackageReference Include="System.Data.SQLite.Linq">
+      <Version>1.0.117</Version>
     </PackageReference>
     <PackageReference Include="System.Net.Primitives">
       <Version>4.3.1</Version>
@@ -283,6 +305,7 @@
     <None Include="Resources\choice.png" />
     <None Include="Resources\return.png" />
     <None Include="Resources\return1.png" />
+    <None Include="Resources\return %281%29.png" />
     <Content Include="x64\SQLite.Interop.dll" />
     <Content Include="x86\SQLite.Interop.dll" />
     <None Include="Resources\Dou.wav" />
